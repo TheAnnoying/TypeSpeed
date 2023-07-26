@@ -43,7 +43,7 @@ client.once(Discord.Events.ClientReady, async () => {
     if(fs.existsSync("./data/restart.json")) {
         const restart = JSON.parse(fs.readFileSync("./data/restart.json", "utf8"));
         if(restart[0] && restart[1]) {
-            (await fn.getMessage(await fn.getChannel(restart[0]),  restart[1])).edit({ embeds: [ fn.makeEmbed({ description: "Restarted successfully" }) ] })
+            (await fn.getMessage(await fn.getChannel(restart[0]), restart[1])).edit({ embeds: [ fn.makeEmbed({ description: "Restarted successfully" }) ] })
         }
     };
     console.log("on the line!");
