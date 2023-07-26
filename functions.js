@@ -154,7 +154,7 @@ async function memberArg(item, data) {
             if(user) member = createMember(user);
         }
     } catch {}
-    if(!member && !data.errorless) return data.message.reply({ embeds: [ makeError(`the member \`${item.limit()}\` could not be found`) ] });
+    if(!member && !data.errorless) return data.message.reply({ embeds: [ makeError(`The member \`${item.limit()}\` could not be found`) ] });
     return member;
 }
 
