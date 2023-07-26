@@ -1,4 +1,4 @@
-import difflib from "difflib";
+import { getCloseMatches } from "difflib";
 import fs from "node:fs";
 import Database from "better-sqlite3";
 
@@ -65,10 +65,10 @@ client.on(Discord.Events.MessageCreate, async message => {
     if(message.content.startsWith("t!")) {
         const args = message.content.slice("t!".length).split(" ");
         const providedCommand = args.shift().toLowerCase();
-
+        
         const command = client.commands.get(providedCommand) ?? client.commands.find(c => c.aliases.includes(providedCommand));
         if(!command) {
-            const closest = difflib.getCloseMatches(providedCommand, client.commands.map(command => command.name), 1, 0)[0];
+            const closest = getCloseMatches(providedCommand, client.commands.map(command => command.name), 1, 0)[0];
             message.reply({
                 embeds: [ fn.makeError(`The command \`${providedCommand}\` was not found. Did you mean \`${closest}\`?`) ],
                 components: [ fn.makeRow({ buttons: [{ label: "Run", id: `run_${closest}`, style: "gray" }, { label: "Delete", id: "nevermind", style: "gray" }] }) ]
@@ -95,8 +95,9 @@ client.on(Discord.Events.InteractionCreate, async interaction => {
 
         const msg = await fn.getMessage(interaction.message.channel, interaction.message.reference.messageId);
         const args = msg.content.slice("t!".length).split(" ");
-        const providedCommand = interaction.customId.split("_")[1];
-
+        const providedCommand = interaction.customId.split("_")[1].toLowerCase();
+        args.shift();
+        
         const command = client.commands.get(providedCommand) ?? client.commands.find(c => c.aliases.includes(providedCommand));
         command.execute(msg, args, client);
         interaction.message.delete();
