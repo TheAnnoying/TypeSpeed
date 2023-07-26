@@ -16,7 +16,7 @@ export default {
         });
 
         if(tests.count === 0) {
-            message.reply({ embeds: [ fn.makeError(`${member.user.username} hasn't taken any tests!`) ] });
+            message.reply({ embeds: [ fn.makeError(`\`${member.user.username}\` hasn't taken any tests!`) ] });
         } else {
             embed.addFields(
                 { name: "Tests Taken", value: tests.count.toString(), inline: true },

@@ -82,8 +82,8 @@ export default {
             if(newWords.length <= 15) embed.setFooter({ text: `${testID}  •  Low word counts may result in less accurate results` });
         
             m.reply({ embeds: [ embed.addFields(
-                { name: "WPM", value: `\`${(netWPM.toFixed(0))}\`${grossWPM.toFixed(0) === netWPM.toFixed(0) ? "" : ` (raw: \`${grossWPM.toFixed(0)}\`)`}` },
-                { name: "Time Took", value: `\`${ms(timeTook)}\``, inline: true },
+                { name: "WPM", value: `${(netWPM.toFixed(0))}${grossWPM.toFixed(0) === netWPM.toFixed(0) ? "" : ` (raw: ${grossWPM.toFixed(0)})`}` },
+                { name: "Time Took", value: ms(timeTook), inline: true },
                 { name: "Accuracy", value: `${accuracy}%${accuracy === 100 ? "" : ` (${mistakeAmount} mistake${mistakeAmount === 1 ? "" : "s"})`}`, inline: true }
             ) ], components: [ fn.makeRow({ buttons: [{ label: "Delete", id: "delete", style: "danger", disabled: valid ? false : true }] })] });
         });

@@ -18,8 +18,8 @@ export default {
             fn.makeEmbed({
                 author: [ user.username, user.displayAvatarURL({ dynamic: true }) ],
                 fields: [
-                    [ "WPM", `\`${test.wpm}\`${test.grosswpm === test.wpm ? "" : ` (raw: \`${test.grosswpm}\`)`}` ],
-                    [ "Time Took", `\`${ms(test.timetook)}\``, true ],
+                    [ "WPM", `${test.wpm}${test.grosswpm === test.wpm ? "" : ` (raw: ${test.grosswpm})`}` ],
+                    [ "Time Took", ms(test.timetook), true ],
                     [ "Accuracy", `${test.accuracy}%${test.accuracy === 100 ? "" : ` (${test.mistakes} mistake${test.mistakes === 1 ? "" : "s"})`}`, true ]
                 ],
                 footer: [ `ID: ${test.id.toString()}` ],
