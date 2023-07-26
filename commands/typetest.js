@@ -89,7 +89,7 @@ export default {
         });
 
         collector.on("end", collected => {
-            if(collected.size === 0) testMessage.edit({ embeds: [ fn.makeError("the test timed out") ], files: [], components: [] });
+            if(collected.size === 0) testMessage.edit({ embeds: [ fn.makeError("The test timed out") ], files: [], components: [] });
         });
     }
 }
