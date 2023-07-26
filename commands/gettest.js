@@ -11,7 +11,7 @@ export default {
         if(providedId % 1 !== 0) return message.reply({ embeds: [ fn.makeError("You must provide a whole number") ] });
 
         const test = fn.db.tests.getTestFromId(providedId);
-        if(!test) return message.reply({ embeds: [ fn.makeError(`No test exists with the ID \`${providedId}\``) ] })
+        if(!test) return message.reply({ embeds: [ fn.makeError(`The ID \`${providedId}\` does not belong to any test`) ] })
         const user = await fn.getUser(test.user);
 
         message.reply({ embeds: [
