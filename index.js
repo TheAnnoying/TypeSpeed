@@ -46,7 +46,8 @@ client.once(Discord.Events.ClientReady, async () => {
             (await fn.getMessage(await fn.getChannel(restart[0]), restart[1])).edit({ embeds: [ fn.makeEmbed({ description: "Restarted successfully" }) ] })
         }
     };
-    console.log("on the line!");
+
+    fn.typeWriterAnimation("Type Test Bot", () => console.log("is now online!"));
 });
 
 client.commands = new Discord.Collection();

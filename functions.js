@@ -25,6 +25,19 @@ function prepareDBAction(action, run = "run", input = null, output = null) {
     }
 }
 
+function typeWriterAnimation(text, callback) {
+    let index = 0;
+    const intervalId = setInterval(() => {
+        process.stdout.write(text[index]);
+        index++;
+        if (index === text.length) {
+            clearInterval(intervalId);
+            process.stdout.write("\n");
+            if (callback && typeof callback === "function") setTimeout(callback, 500);
+        }
+    }, 50);
+}
+
 const db = {
     tests: {
         add: prepareDBAction(`
@@ -186,4 +199,4 @@ function makeEmbed(data) {
     return embed;
 }
 
-export default { sleep, db, makeEmbed, loop, randomElement, createMember, memberArg, getChannel, getGuild, getMember, getMessage, getUser, getRole, getGuildEmoji, makeRow, makeError };
+export default { typeWriterAnimation, sleep, db, makeEmbed, loop, randomElement, createMember, memberArg, getChannel, getGuild, getMember, getMessage, getUser, getRole, getGuildEmoji, makeRow, makeError };
