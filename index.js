@@ -1,6 +1,7 @@
 import { getCloseMatches } from "difflib";
 import fs from "node:fs";
 import Database from "better-sqlite3";
+import chalk from "chalk";
 
 globalThis.Discord = await import("discord.js");
 globalThis.database = new Database("data/data.db");
@@ -48,9 +49,9 @@ client.once(Discord.Events.ClientReady, async () => {
     };
 
     fn.typeWriterAnimation({
-        text: "Type Test Bot",
-        callback: () => console.log("is now online!")
-    });
+        text: "it's the real type test bot, and is more specifically-",
+        speed: 45
+    }, () => console.log(chalk.greenBright.overline.underline("now online.")));
 });
 
 client.commands = new Discord.Collection();
