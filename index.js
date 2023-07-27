@@ -47,7 +47,10 @@ client.once(Discord.Events.ClientReady, async () => {
         }
     };
 
-    fn.typeWriterAnimation("Type Test Bot", () => console.log("is now online!"));
+    fn.typeWriterAnimation({
+        text: "Type Test Bot",
+        callback: () => console.log("is now online!")
+    });
 });
 
 client.commands = new Discord.Collection();

@@ -25,17 +25,17 @@ function prepareDBAction(action, run = "run", input = null, output = null) {
     }
 }
 
-function typeWriterAnimation(text, callback) {
+function typeWriterAnimation(data = {}) {
     let index = 0;
     const intervalId = setInterval(() => {
-        process.stdout.write(text[index]);
+        process.stdout.write(data.text[index]);
         index++;
-        if (index === text.length) {
+        if (index === data.text.length) {
             clearInterval(intervalId);
             process.stdout.write("\n");
-            if (callback && typeof callback === "function") setTimeout(callback, 500);
+            if (data?.callback && typeof data?.callback === "function") setTimeout(data?.callback, 500);
         }
-    }, 50);
+    }, data?.speed ?? 50);
 }
 
 const db = {
