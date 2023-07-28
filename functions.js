@@ -101,26 +101,26 @@ function makeRow(data) {
 
             row.addComponents(element);
         });
-    } else if(data.selectmenus) {
-        data.selectmenus.forEach(select => {
-            const element = new Discord.StringSelectMenuBuilder().setCustomId(select.id);
+    } else if(data.selectmenu) {
+        const select = data.selectmenu;
+        const element = new Discord.StringSelectMenuBuilder().setCustomId(select.id);
+        if(select.placeholder) element.setPlaceholder(select.placeholder);
 
-            select.min ? element.setMinValues(select.min) : null;
-            select.max ? element.setMaxValues(select.max) : null;
-            select.disabled ? element.setDisabled(true) : null;
+        select.min ? element.setMinValues(select.min) : null;
+        select.max ? element.setMaxValues(select.max) : null;
+        select.disabled ? element.setDisabled(true) : null;
+        
+        select.options.forEach(option => {
+            const optionElement = new Discord.StringSelectMenuOptionBuilder().setLabel(option.name).setValue(option.value);
             
-            select.options.forEach(option => {
-                const optionElement = new Discord.StringSelectMenuOptionBuilder().setLabel(option.name).setValue(option.value);
-                
-                option.description ? optionElement.setDescription(option.description) : null;
-                option.emoji ? optionElement.setEmoji(option.emoji) : null;
-                option.default ? optionElement.setDefault(option.default) : optionElement.setDefault(false);
+            option.description ? optionElement.setDescription(option.description) : null;
+            option.emoji ? optionElement.setEmoji(option.emoji) : null;
+            option.default ? optionElement.setDefault(option.default) : optionElement.setDefault(false);
 
-                element.addOptions(optionElement);
-            });
-
-            row.addComponents(element);
+            element.addOptions(optionElement);
         });
+
+        row.addComponents(element);
     }
 
     return row;
