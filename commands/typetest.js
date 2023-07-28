@@ -5,7 +5,10 @@ import ms from "ms";
 
 export default {
     name: "typetest",
-    aliases: [ "test", "starttest", "startest", "tt" ],
+    category: "typetest",
+    description: "Start a typing test",
+    args: ["optional: word count, default: 30"],
+    aliases: [ "test", "starttest", "startest", "tt", "ypetest" ],
     async execute(message, args) {
         let newWords = [];
         const wordCount = parseInt(args[0]);
@@ -85,7 +88,7 @@ export default {
                 { name: "WPM", value: `${(netWPM.toFixed(0))}${grossWPM.toFixed(0) === netWPM.toFixed(0) ? "" : ` (raw: ${grossWPM.toFixed(0)})`}` },
                 { name: "Time Took", value: ms(timeTook), inline: true },
                 { name: "Accuracy", value: `${accuracy}%${accuracy === 100 ? "" : ` (${mistakeAmount} mistake${mistakeAmount === 1 ? "" : "s"})`}`, inline: true }
-            ) ], components: [ fn.makeRow({ buttons: [{ label: "Delete", id: "delete", style: "danger", disabled: valid ? false : true }] })] });
+            ) ], components: [ fn.makeRow({ buttons: [{ label: "Delete Test", id: `delete_${message.member.user.id}_${testID}`, style: "danger", disabled: valid ? false : true }] })] });
         });
 
         collector.on("end", collected => {

@@ -2,6 +2,9 @@ import ms from "ms";
 
 export default {
     name: "gettest",
+    category: "typetest",
+    description: "Display information on a specific type test",
+    args: ["test id"],
     aliases: [ "getest", "findtest", "gt" ],
     async execute(message, args) {
         const providedId = parseFloat(args[0]);
@@ -25,6 +28,6 @@ export default {
                 footer: [ `ID: ${test.id.toString()}` ],
                 timestamp: test.time
             })
-        ], components: [ fn.makeRow({ buttons: [{ label: "Delete", id: "delete", style: "danger" }] }) ] });
+        ], components: [ fn.makeRow({ buttons: [{ label: "Delete Test", id: `delete_${message.member.user.id}_${test.id}`, style: "danger" }] }) ] });
     }
 }

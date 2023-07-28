@@ -1,5 +1,8 @@
 export default {
     name: "getprofile",
+    category: "typetest",
+    description: "Display Type Test-related information on someone",
+    args: ["user"],
     aliases: [ "getmember", "getp", "gp", "profile" ],
     async execute(message, args) {
         const member = await fn.memberArg(args[0], { message });
