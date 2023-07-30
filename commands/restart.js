@@ -6,7 +6,7 @@ export default {
     description: "Restart the bot",
     owner: true,
     aliases: [ "reboot", "end", "kill" ],
-    async execute(message, args, client) {
+    async execute(message, args) {
         const msg = await message.reply({ embeds: [ fn.makeEmbed({ description: "Restarting..." }) ] });
 
         client.destroy();

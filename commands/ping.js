@@ -2,7 +2,7 @@ export default {
     name: "ping",
     category: "bot",
     description: "Check the ping",
-    async execute(message, args, client) {
+    async execute(message, args) {
         const before = Date.now();
         const ping = await message.reply({ embeds: [ fn.makeEmbed({
             title: "Pinging...",

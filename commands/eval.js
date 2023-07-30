@@ -17,7 +17,7 @@ export default {
     owner: true,
     args: ["code"],
     aliases: [ "eval" ],
-    async execute(message, args, client) {
+    async execute(message, args) {
         let text = args.join(" ");
         if(!text) return message.reply({ embeds: [ fn.makeError("You must provide code to evaluate") ] });
 

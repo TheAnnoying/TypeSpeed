@@ -4,7 +4,7 @@ export default {
     description: "Get a list of available bot commands",
     args: ["optional: command name"],
     aliases: [ "h", "commands" ],
-    async execute(message, args, client) {
+    async execute(message, args) {
         if(args.length === 0) {
             message.reply({ embeds: [ fn.makeEmbed({
                 title: "Help Menu",
