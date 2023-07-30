@@ -85,7 +85,7 @@ client.on(Discord.Events.MessageCreate, async message => {
                 await client.application.fetch();
                 if(message.author.id !== client.application.owner.id) return message.reply({ embeds: [ fn.makeError("This command can only be used by the bot's owner") ] });
             }
-            command.execute(message, args, client);
+            command.execute(message, args);
         };
     }
 });
