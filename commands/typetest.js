@@ -5,22 +5,21 @@ import ms from "ms";
 
 export default {
     name: "typetest",
-    category: "typetest",
-    description: "Start a typing test",
-    args: ["optional: word count, default: 30"],
+    category: "typing",
     aliases: [ "test", "starttest", "startest", "tt", "ypetest" ],
     async execute(message, args) {
+        const lang = fn.db.guilds.get(message.guild.id);
         let newWords = [];
         const wordCount = parseInt(args[0]);
 
-        if(wordCount < 0) return message.reply({ embeds: [ fn.makeError("The word count must be a positive number") ] });
-        if(wordCount < 10) return message.reply({ embeds: [ fn.makeError("The word count must be greater than or equal to \`10\`") ] });
-        if(wordCount >= 51) return message.reply({ embeds: [ fn.makeError("The word count must be less than or equal to 50") ] });
+        if(wordCount < 0) return message.reply({ embeds: [ fn.makeError(locale[lang].commands.typetest.positivewordcount) ] });
+        if(wordCount < 10) return message.reply({ embeds: [ fn.makeError(locale[lang].commands.typetest.greaterthan10) ] });
+        if(wordCount >= 51) return message.reply({ embeds: [ fn.makeError(locale[lang].commands.typetest.lowerthan50) ] });
     
         fn.loop(wordCount ? wordCount : 30, i => {
-            let randomWord = fn.randomElement(words);
+            let randomWord = fn.randomElement(locale[lang].words);
 
-            while(newWords[i-1] == randomWord) randomWord = fn.randomElement(words);
+            while(newWords[i-1] == randomWord) randomWord = fn.randomElement(locale[lang].words);
             newWords.push(randomWord);
         });
 
@@ -71,28 +70,28 @@ export default {
             let testID;
 
             const embed = fn.makeEmbed({
-                title: "Test Results",
-                description: "Information about your recent type test",
+                title: locale[lang].commands.typetest.title,
+                description: locale[lang].commands.typetest.description,
             });
 
-            if(netWPM >= 250) { embed.setFooter({ text: `The user probably cheated on this test` }); valid = false; }
-            if(accuracy <= 50) { embed.setFooter({ text: `Invalid test - low accuracy` }); valid = false; }
-            if(netWPM < 10) { embed.setFooter({ text: `Invalid test - low wpm`}); valid = false; };
+            if(netWPM >= 250) { embed.setFooter({ text: locale[lang].commands.typetest.cheated }); valid = false; }
+            if(accuracy <= 50) { embed.setFooter({ text: locale[lang].commands.typetest.lowaccuracy }); valid = false; }
+            if(netWPM < 10) { embed.setFooter({ text: locale[lang].commands.typetest.lowwpm }); valid = false; };
 
             if(valid) testID = fn.db.tests.add(message.member.user.id, netWPM, grossWPM, mistakeAmount, timeTook, accuracy);
 
             embed.setFooter({ text: `ID: ${testID.toString()}` });
-            if(newWords.length <= 15) embed.setFooter({ text: `${testID}  •  Low word counts may result in less accurate results` });
+            if(newWords.length <= 15) embed.setFooter({ text: `${testID}  •  ${locale[lang].commands.typetest.disclaimer}` });
         
             m.reply({ embeds: [ embed.addFields(
-                { name: "WPM", value: `${(netWPM.toFixed(0))}${grossWPM.toFixed(0) === netWPM.toFixed(0) ? "" : ` (raw: ${grossWPM.toFixed(0)})`}` },
-                { name: "Time Took", value: ms(timeTook), inline: true },
-                { name: "Accuracy", value: `${accuracy}%${accuracy === 100 ? "" : ` (${mistakeAmount} mistake${mistakeAmount === 1 ? "" : "s"})`}`, inline: true }
-            ) ], components: [ fn.makeRow({ buttons: [{ label: "Delete Test", id: `delete_${message.member.user.id}_${testID}`, style: "danger", disabled: valid ? false : true }] })] });
+                { name: "WPM", value: `${(netWPM.toFixed(0))}${grossWPM.toFixed(0) === netWPM.toFixed(0) ? "" : ` (${locale[lang].commands.typetest.raw}: ${grossWPM.toFixed(0)})`}` },
+                { name: locale[lang].commands.typetest.timetook, value: ms(timeTook), inline: true },
+                { name: locale[lang].commands.typetest.accuracy, value: `${accuracy}%${accuracy === 100 ? "" : ` (${mistakeAmount} ${mistakeAmount === 1 ? locale[lang].commands.typetest.mistake : locale[lang].commands.typetest.mistakes})`}`, inline: true }
+            ) ], components: [ fn.makeRow({ buttons: [{ label: locale[lang].buttons.deletetest.label, id: `delete_${message.member.user.id}_${testID}`, style: "danger", disabled: valid ? false : true }] })] });
         });
 
         collector.on("end", collected => {
-            if(collected.size === 0) testMessage.edit({ embeds: [ fn.makeError("The test timed out") ], files: [], components: [] });
+            if(collected.size === 0) testMessage.edit({ embeds: [ fn.makeError(locale[lang].commands.typetest.timedout) ], files: [], components: [] });
         });
     }
 }

@@ -3,16 +3,14 @@ import fs from "node:fs";
 export default {
     name: "restart",
     category: "bot",
-    description: "Restart the bot",
     owner: true,
     aliases: [ "reboot", "end", "kill" ],
     async execute(message, args) {
-        const msg = await message.reply({ embeds: [ fn.makeEmbed({ description: "Restarting..." }) ] });
+        const lang = fn.db.guilds.get(message.guild.id);
+        const msg = await message.reply({ embeds: [ fn.makeEmbed({ description: locale[lang].commands.restart.restarting }) ] });
 
         client.destroy();
-        if(["reboot", "restart"].includes(message.content)) {
-            fs.writeFileSync("./data/restart.json", JSON.stringify([msg.channel.id, msg.id]), "utf8");
-        }
+        fs.writeFileSync("./data/restart.json", JSON.stringify([msg.channel.id, msg.id, msg.guild.id]), "utf8");
         process.exit();
     }
 }

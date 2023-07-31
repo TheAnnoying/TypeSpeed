@@ -1,27 +1,27 @@
 export default {
     name: "help",
     category: "bot",
-    description: "Get a list of available bot commands",
-    args: ["optional: command name"],
     aliases: [ "h", "commands" ],
     async execute(message, args) {
+        const lang = fn.db.guilds.get(message.guild.id);
+
         if(args.length === 0) {
             message.reply({ embeds: [ fn.makeEmbed({
-                title: "Help Menu",
-                description: "Select a command to view more information about it",
+                title: locale[lang].commands.help.title,
+                description: locale[lang].commands.help.description,
             }) ], components: [
-                fn.makeRow({ selectmenu: { id: "typetest", placeholder: "Command from category: typetest", options: client.commandList.filter(c => c.category === "typetest").map(c => ({ name: c.name, value: c.name, description: c.description })) } }),
-                fn.makeRow({ selectmenu: { id: "bot", placeholder: "Command from category: bot", options: client.commandList.filter(c => c.category === "bot").map(c => ({ name: c.name, value: c.name, description: c.description })) } }),
+                fn.makeRow({ selectmenu: { id: `typing_${message.author.id}`, placeholder: locale[lang].commands.help.placeholders[0], options: client.commandList.filter(c => c.category === "typing").map(c => ({ name: c.name, value: c.name, description: c.description })) } }),
+                fn.makeRow({ selectmenu: { id: `bot_${message.author.id}`, placeholder: locale[lang].commands.help.placeholders[1], options: client.commandList.filter(c => c.category === "bot").map(c => ({ name: c.name, value: c.name, description: c.description })) } }),
             ] });
         } else {
             const command = client.commands.get(args[0]);
-            if(!command) return message.reply({ embeds: [ fn.makeError("That command does not exist") ] });
+            if(!command) return message.reply({ embeds: [ fn.makeError(locale[lang].commands.help.nocommand) ] });
             message.reply({ embeds: [ fn.makeEmbed({
                 title: command.name,
                 description: command.description,
                 fields: [
-                    [ "Usage", `\`t!${command.name}${command?.args ? " " : ""}${command?.args?.map(a => `[${a}]`) ?? ""}\`` ],
-                    [ "Aliases", command?.aliases?.map(a => `\`${a}\``).join(", ") ?? "None" ]
+                    [ locale[lang].commands.help.usage, `\`t!${command.name}${locale[lang].commands[command.name].info?.args ? " " : ""}${locale[lang].commands[command.name].info?.args?.map(a => `[${a}]`)}\`` ],
+                    [ locale[lang].commands.help.aliases, command?.aliases?.map(a => `\`${a}\``).join(", ") ?? locale[lang].commands.help.none ]
                 ]
             }) ] });
         }

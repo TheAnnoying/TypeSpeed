@@ -13,13 +13,13 @@ class ConsoleOutput extends Duplex {
 
 export default {
     name: "evaluate",
-    description: "Evalulate code",
     owner: true,
-    args: ["code"],
     aliases: [ "eval" ],
     async execute(message, args) {
+        const lang = fn.db.guilds.get(message.guild.id);
+        
         let text = args.join(" ");
-        if(!text) return message.reply({ embeds: [ fn.makeError("You must provide code to evaluate") ] });
+        if(!text) return message.reply({ embeds: [ fn.makeError(locale[lang].commands.eval.youmustprovidecode) ] });
 
         text = text.replace(/^```(js|javascript)?|```$/g, "").trim();
         const evalOut = new ConsoleOutput()
