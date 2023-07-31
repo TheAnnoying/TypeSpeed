@@ -1,0 +1,99 @@
+{
+    "en": {
+        "words": [ "the", "be", "of", "and", "a", "to", "in", "he", "have", "it", "that", "for", "they", "I", "with", "as", "not", "on", "she", "at", "by", "this", "we", "you", "do", "but", "from", "or", "which", "one", "would", "all", "will", "there", "say", "who", "make", "when", "can", "more", "if", "no", "man", "out", "other", "so", "what", "time", "up", "go", "about", "than", "into", "could", "state", "only", "new", "year", "some", "take", "come", "these", "know", "see", "use", "get", "like", "then", "first", "any", "work", "now", "may", "such", "give", "over", "think", "most", "even", "find", "day", "also", "after", "way", "many", "must", "look", "before", "great", "back", "through", "long", "where", "much", "should", "well", "people", "down", "own", "just", "because", "good", "each", "those", "feel", "seem", "how", "high", "too", "place", "little", "world", "very", "still", "nation", "hand", "old", "life", "tell", "write", "become", "here", "show", "house", "both", "between", "need", "mean", "call", "develop", "under", "last", "right", "move", "thing", "general", "school", "never", "same", "another", "begin", "while", "number", "part", "turn", "real", "leave", "might", "want", "point", "form", "off", "child", "few", "small", "since", "against", "ask", "late", "home", "interest", "large", "person", "end", "open", "public", "follow", "during", "present", "without", "again", "hold", "govern", "around", "possible", "head", "consider", "word", "program", "problem", "however", "lead", "system", "set", "order", "eye", "plan", "run", "keep", "face", "fact", "group", "play", "stand", "increase", "early", "course", "change", "help", "line" ],
+        "commands": {
+            "execution": {
+                "notfound": "The command `${providedCommand}` was not found. Did you mean `${closest}`?",
+                "buttons": {
+                    "run": "Run",
+                    "Delete": "Delete"
+                },
+                "owneronly": "This command can only be used by the bot's owner"
+            },
+            "eval": {
+                "info": {
+                    "description": "Evalulate code",
+                    "args": ["code"]
+                },                
+                "youmustprovidecode": "You must provide code to evaluate"
+            },
+            "getprofile": {
+                "info": {
+                    "description": "Display Type Test-related information on someone",
+                    "args": ["user"]
+                },
+                "author": "Type Test Profile",
+                "description": "member's profile",
+                "footer": "Latest test on",
+                "noteststaken": "`username` hasn't taken any tests!",
+                "fields": ["Tests Taken", "Average WPM"]
+            },
+            "gettest": {
+                "info": {
+                    "description": "Display information on a specific type test",
+                    "args": ["test id"]
+                },
+                "provideid": "You must provide a test ID",
+                "positivenumber": "You must provide a positive number that isn't 0",
+                "wholenumber": "You must provide a whole number",
+                "doesntexist": "The ID `id` does not belong to any test"
+            },
+            "help": {
+                "info": {
+                    "description": "Get a list of available bot commands",
+                    "args": ["optional: command name"]
+                },
+                "title": "Help Menu",
+                "description": "Select a command to view more information about it",
+                "placeholders": ["Command from category: typing", "Command from category: bot"],
+                "nocommand": "That command does not exist",
+                "usage": "Usage",
+                "aliases": "Aliases",
+                "none": "None"
+            },
+            "ping": {
+                "info": {
+                    "description": "Check the bot's ping"
+                },
+                "titles": ["Pinging...", "Ping Results"],
+                "fields": ["API Latency", "Bot Latency"]
+            },
+            "restart": {
+                "info": {
+                    "description": "Restart the bot"
+                },
+                "restarting": "Restarting...",
+                "restarted": "Restarted successfully"
+            },
+            "typetest": {
+                "info": {
+                    "description": "Start a typing test",
+                    "args": ["optional: word count, default: 30"]
+                },
+                "positivewordcount": "The word count must be a positive number",
+                "greaterthan10": "The word count must be greater than or equal to `10`",
+                "lowerthan50": "The word count must be less than or equal to `50`",
+                "title": "Test Results",
+                "description": "Information about your recent type test",
+                "cheated": "The user probably cheated on this test",
+                "lowaccuracy": "Invalid test - low accuracy",
+                "lowwpm": "Invalid test - low wpm",
+                "disclaimer": "Low word counts may result in less accurate results",
+                "timedout": "The test timed out",
+                "timetook": "Time Took",
+                "accuracy": "Accuracy",
+                "mistake": "mistake",
+                "mistakes": "mistakes",
+                "raw": "raw"
+            }
+        },
+        "buttons": {
+            "authoronly": "This button can only be used by the original author",
+            "deletetest": {
+                "label": "Delete Test",
+                "title": "Test Deleted",
+                "description": "Deleted test from profile"
+            }
+        } 
+    }
+}

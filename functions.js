@@ -58,6 +58,20 @@ const db = {
             DELETE FROM tests
             WHERE id = ?
         `)
+    },
+    guilds: {
+        set: prepareDBAction(`
+            INSERT INTO guilds (id, lang)
+            VALUES (?, ?)
+            ON CONFLICT (id) DO UPDATE
+            SET lang = ?
+            WHERE id = ?
+        `, "run", (i, l) => [i, l, l, i]),
+        get: prepareDBAction(`
+            SELECT lang
+            FROM guilds
+            WHERE id = ?
+        `, "get", null, o => o?.lang ?? "en")
     }
 }
 
