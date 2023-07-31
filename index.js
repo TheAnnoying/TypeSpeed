@@ -137,7 +137,7 @@ client.on(Discord.Events.InteractionCreate, async interaction => {
             title: command.name,
             description: locale[lang].commands[command.name].info.description,
             fields: [
-                [ locale[lang].commands.help.usage, `\`t!${command.name}${locale[lang].commands[command.name].info?.args ? " " : ""}${locale[lang].commands[command.name].info?.args?.map(a => `[${a}]`)}\`` ],
+                [ locale[lang].commands.help.usage, `\`t!${command.name}${locale[lang].commands[command.name].info?.args ? " " : ""}${locale[lang].commands[command.name].info?.args?.map(a => `[${a}]`) ?? ""}\`` ],
                 [ locale[lang].commands.help.aliases, command?.aliases?.map(a => `\`${a}\``).join(", ") ?? locale[lang].commands.help.none ],
             ],
             footer: [ command.category ]
