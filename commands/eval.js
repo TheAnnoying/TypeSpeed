@@ -19,7 +19,7 @@ export default {
         const lang = fn.db.guilds.get(message.guild.id);
         
         let text = args.join(" ");
-        if(!text) return message.reply({ embeds: [ fn.makeError(locale[lang].commands.eval.youmustprovidecode) ] });
+        if(!text) return message.reply({ embeds: [ fn.makeError(locale[lang].commands.eval.youmustprovidecode, message) ] });
 
         text = text.replace(/^```(js|javascript)?|```$/g, "").trim();
         const evalOut = new ConsoleOutput()

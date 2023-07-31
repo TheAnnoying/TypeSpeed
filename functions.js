@@ -75,8 +75,9 @@ const db = {
     }
 }
 
-function makeError(description) {
-    return makeEmbed({ color: "#dd403a", author: [ "Error", "https://theannoying.dev/assets/error.png" ], description })
+function makeError(description, message) {
+    const lang = db.guilds.get(message.guild.id);
+    return makeEmbed({ color: "#dd403a", author: [ locale[lang].error, "https://theannoying.dev/assets/error.png" ], description })
 }
 
 async function get(thing, id) {

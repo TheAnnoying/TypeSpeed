@@ -1,12 +1,13 @@
 {
     "en": {
+        "error": "Error",
         "words": [ "the", "be", "of", "and", "a", "to", "in", "he", "have", "it", "that", "for", "they", "I", "with", "as", "not", "on", "she", "at", "by", "this", "we", "you", "do", "but", "from", "or", "which", "one", "would", "all", "will", "there", "say", "who", "make", "when", "can", "more", "if", "no", "man", "out", "other", "so", "what", "time", "up", "go", "about", "than", "into", "could", "state", "only", "new", "year", "some", "take", "come", "these", "know", "see", "use", "get", "like", "then", "first", "any", "work", "now", "may", "such", "give", "over", "think", "most", "even", "find", "day", "also", "after", "way", "many", "must", "look", "before", "great", "back", "through", "long", "where", "much", "should", "well", "people", "down", "own", "just", "because", "good", "each", "those", "feel", "seem", "how", "high", "too", "place", "little", "world", "very", "still", "nation", "hand", "old", "life", "tell", "write", "become", "here", "show", "house", "both", "between", "need", "mean", "call", "develop", "under", "last", "right", "move", "thing", "general", "school", "never", "same", "another", "begin", "while", "number", "part", "turn", "real", "leave", "might", "want", "point", "form", "off", "child", "few", "small", "since", "against", "ask", "late", "home", "interest", "large", "person", "end", "open", "public", "follow", "during", "present", "without", "again", "hold", "govern", "around", "possible", "head", "consider", "word", "program", "problem", "however", "lead", "system", "set", "order", "eye", "plan", "run", "keep", "face", "fact", "group", "play", "stand", "increase", "early", "course", "change", "help", "line" ],
         "commands": {
             "execution": {
-                "notfound": "The command `${providedCommand}` was not found. Did you mean `${closest}`?",
+                "notfound": "The command `providedCommand` was not found. Did you mean `closest`?",
                 "buttons": {
                     "run": "Run",
-                    "Delete": "Delete"
+                    "delete": "Delete"
                 },
                 "owneronly": "This command can only be used by the bot's owner"
             },
@@ -93,6 +94,104 @@
                 "label": "Delete Test",
                 "title": "Test Deleted",
                 "description": "Deleted test from profile"
+            }
+        } 
+    },
+    "he": {
+        "error": "שגיאה",
+        "words": [ "אכן", "להיות", "של", "בנוסף", "זה", "לאן", "בתוך", "הוא", "יש", "את", "שם", "בשביל", "הם", "אני", "עם", "מכיוון", "לא", "מופעל", "היא", "אצל", "ליד", "פה", "אנחנו", "אתה", "עושה", "אבל", "איפה", "או", "איזו", "אחד", "יוכל", "הכל", "רצון", "הנה", "לאמר", "מי", "מכין", "כאשר", "יכול", "עוד", "אילו", "לא", "איש", "בחוץ", "אחר", "אז", "מה", "זמן", "למעלה", "ללכת", "לגבי", "מאשר", "אל", "היה", "מצב", "רק", "חדש", "שנה", "חלק", "לקחת", "לבוא", "אלו", "לדעת", "לראות", "להשתמש", "להשיג", "לאהוב", "ואז", "ראשון", "כל", "לעבוד", "עכשיו", "מותר", "כזה", "לתת", "מעל", "לחשוב", "לרוב", "אפילו", "למצוא", "יום", "וגם", "לאחר", "דרך", "הרבה", "חובה", "להסתכל", "לפני", "נהדר", "מאחור", "בין", "ארוך", "איפה", "מלא", "כדאי", "ובכן", "אנשים", "למטה", "בעלים", "משום", "בגלל", "טוב", "כל אחד", "אלו", "להרגיש", "נראה", "כיצד", "גבוה", "גם", "מקום", "קטן", "עולם", "מאוד", "עדיין", "אומה", "יד", "זקן", "חיים", "להגיד", "לרשום", "להפוך", "כאן", "להראות", "בית", "שניהם", "בין", "צריך", "להתכוון", "להתקשר", "לפתח", "מתחת", "אחרון", "נכון", "לזוז", "דבר", "כללי", "בית ספר", "אף פעם", "זהה", "נוסף", "מתחיל", "בזמן", "מספר", "חלק", "לפנות", "אמיתי", "לעזוב", "עלול", "לרצות", "נקודה", "סוג", "כבוי", "ילד", "חלק", "קטן", "מאז", "נגד", "לשאול", "מאוחר", "בית", "מעניין", "גדול", "איש", "סוף", "פתוח", "ציבורי", "לעקוב", "בזמן", "נוכח", "בלי", "שוב", "להחזיק", "לשלוט", "מסביב", "אפשרי", "ראש", "לשקול", "מילה", "תוכנה", "בעיה", "אך", "להוביל", "מערכת", "לקבוע", "סדר", "עין", "תוכנית", "לרוץ", "לשמור", "פנים", "עובדה", "קבוצה", "לשחק", "לעמוד", "להגביר", "מוקדם", "מסלול", "לשנות", "לעזור", "קו" ],
+        "commands": {
+            "execution": {
+                "notfound": "הפקודה `providedCommand` לא נמצאה. אולי התכוונת ל-`closest`?",
+                "buttons": {
+                    "run": "הרץ",
+                    "delete": "מחק"
+                },
+                "owneronly": "הפקודה הזאת היא רק ליוצר הבוט"
+            },
+            "eval": {
+                "info": {
+                    "description": "הרץ קוד",
+                    "args": ["קוד"]
+                },                
+                "youmustprovidecode": "חובה עליך לספק קוד להרצה"
+            },
+            "getprofile": {
+                "info": {
+                    "description": "הצג מידע הקשור לבדיקות הקלדה",
+                    "args": ["משתמש"]
+                },
+                "author": "פרופיל הקלדה",
+                "description": "הפרופיל של member",
+                "footer": "בדיקה אחרונה ב-",
+                "noteststaken": "`username` לא עבר שום בדיקה",
+                "fields": ["כמות בדיקות", "WPM ממוצע"]
+            },
+            "gettest": {
+                "info": {
+                    "description": "הצג מידע על בדיקת הקלדה ספציפית",
+                    "args": ["id של בדיקה"]
+                },
+                "provideid": "חובה לספק ID של בדיקה",
+                "positivenumber": "חובה לספק מספר חיובי שהוא לא 0",
+                "wholenumber": "חובה לספק ID",
+                "doesntexist": "ה-ID `id` לא שייך לאף בדיקה"
+            },
+            "help": {
+                "info": {
+                    "description": "השג רשימה של פקודות",
+                    "args": ["רשות: שם פקודה"]
+                },
+                "title": "תפריט עזרה",
+                "description": "בחר פקודה שעליה תרצה עוד מידע",
+                "placeholders": ["פקודה מקטגוריה: typing", "פקודה מקטגוריה: bot"],
+                "nocommand": "הפקודה הזו לא קיימת",
+                "usage": "שימוש",
+                "aliases": "שמות שונים",
+                "none": "שום דבר"
+            },
+            "ping": {
+                "info": {
+                    "description": "השג את הפינג של הבוט"
+                },
+                "titles": ["מבצע פינג...", "תוצאות פינג"],
+                "fields": ["API Latency", "Bot Latency"]
+            },
+            "restart": {
+                "info": {
+                    "description": "אתחל מחדש את הבוט"
+                },
+                "restarting": "מפעיל מחדש...",
+                "restarted": "הופעל מחדש בהצלחה"
+            },
+            "typetest": {
+                "info": {
+                    "description": "התחל בדיקת הקלדה",
+                    "args": ["רשות: כמות מילים, ברירת מחדל: 30"]
+                },
+                "positivewordcount": "כמות המילים חייבת להיות מספר חיובי",
+                "greaterthan10": "כמות המילים חייבת להיות גדולה או שווה ל-`10`",
+                "lowerthan50": "כמות המילים חייבת להיות שווה או קטנה מ-`50`",
+                "title": "Test Results",
+                "description": "מידע לגבי בדיקת ההקלדה האחרונה",
+                "cheated": "המשתמש כנראה רימה בבחינה הזו",
+                "lowaccuracy": "בחינה נפסלה - דיוק נמוך מדי",
+                "lowwpm": "בחינה נפסלה - wpm נמוך מדי",
+                "disclaimer": "כמות מילים קטנה יותר יכולה לגרום לתוצאות לא מדוייקות",
+                "timedout": "תם הזמן לבדיקה",
+                "timetook": "זמן שלקח",
+                "accuracy": "דיוק",
+                "mistake": "טעות",
+                "mistakes": "טעויות",
+                "raw": "לא כולל טעויות"
+            }
+        },
+        "buttons": {
+            "authoronly": "הכפתור הזה יכול לשמש רק את המשתמש המקורי",
+            "deletetest": {
+                "label": "מחק מבחן",
+                "title": "מבחן נמחק",
+                "description": "המבחן נמחק מהפרופיל"
             }
         } 
     }

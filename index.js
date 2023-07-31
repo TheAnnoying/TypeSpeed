@@ -76,20 +76,21 @@ client.on(Discord.Events.MessageCreate, async message => {
     if(!client.isReady() || message.author.bot) return;
 
     if(message.content.startsWith("t!")) {
+        const lang = fn.db.guilds.get(message.guild.id);
         const args = message.content.slice("t!".length).split(" ");
         const providedCommand = args.shift().toLowerCase();
-        
+
         const command = client.commands.get(providedCommand);
         if(!command) {
             const closest = getCloseMatches(providedCommand, client.commands.filter(command => !command.owner).map(command => command.name), 1, 0)[0];
             message.reply({
-                embeds: [ fn.makeError(`The command \`${providedCommand}\` was not found. Did you mean \`${closest}\`?`) ],
-                components: [ fn.makeRow({ buttons: [{ label: "Run", id: `run_${closest}_${message.member.user.id}`, style: "gray" }, { label: "Delete", id: `nevermind_${message.member.user.id}`, style: "gray" }] }) ]
+                embeds: [ fn.makeError(locale[lang].commands.execution.notfound.replace("providedCommand", providedCommand).replace("closest", closest), message) ],
+                components: [ fn.makeRow({ buttons: [{ label: locale[lang].commands.execution.buttons.run, id: `run_${closest}_${message.member.user.id}`, style: "gray" }, { label: locale[lang].commands.execution.buttons.delete, id: `nevermind_${message.member.user.id}`, style: "gray" }] }) ]
             });
         } else {
             if(command.owner) {
                 await client.application.fetch();
-                if(message.author.id !== client.application.owner.id) return message.reply({ embeds: [ fn.makeError("This command can only be used by the bot's owner") ] });
+                if(message.author.id !== client.application.owner.id) return message.reply({ embeds: [ fn.makeError(locale[lang].commands.execution.owneronly, message) ] });
             }
             command.execute(message, args);
         };
@@ -100,21 +101,21 @@ client.on(Discord.Events.InteractionCreate, async interaction => {
     const lang = fn.db.guilds.get(interaction.guild.id);
 
     if(interaction.customId.startsWith("delete")) {
-        if(interaction.member.user.id !== interaction.customId.split("_")[1]) return interaction.reply({ ephemeral: true, embeds: [ fn.makeError(locale[lang].buttons.authoronly) ] });
+        if(interaction.member.user.id !== interaction.customId.split("_")[1]) return interaction.reply({ ephemeral: true, embeds: [ fn.makeError(locale[lang].buttons.authoronly, interaction) ] });
         fn.db.tests.removeTestById(interaction.customId.split("_")[2]);
 
         interaction.message.edit({ components: [ fn.makeRow({ buttons: [{ label: locale[lang].buttons.deletetest.label, id: `delete`, style: "danger", disabled: true }] }) ] })
         interaction.reply({ ephemeral: true, embeds: [ fn.makeEmbed({ description: locale[lang].buttons.deletetest.description, title: locale[lang].buttons.deletetest.title }) ] })
     }
     if(interaction.customId.startsWith("nevermind")) {
-        if(interaction.member.user.id !== interaction.customId.split("_")[1]) return interaction.reply({ ephemeral: true, embeds: [ fn.makeError(locale[lang].buttons.authoronly) ] });
+        if(interaction.member.user.id !== interaction.customId.split("_")[1]) return interaction.reply({ ephemeral: true, embeds: [ fn.makeError(locale[lang].buttons.authoronly, interaction) ] });
         interaction.deferUpdate();
 
         interaction.message.delete();
         (await fn.getMessage(interaction.message.channel, interaction.message.reference.messageId)).delete()
     }
     if(interaction.customId.startsWith("run_")) {
-        if(interaction.member.user.id !== interaction.customId.split("_")[2]) return interaction.reply({ ephemeral: true, embeds: [ fn.makeError(locale[lang].buttons.authoronly) ] }); 
+        if(interaction.member.user.id !== interaction.customId.split("_")[2]) return interaction.reply({ ephemeral: true, embeds: [ fn.makeError(locale[lang].buttons.authoronly, interaction) ] }); 
         interaction.deferUpdate();
 
         const msg = await fn.getMessage(interaction.message.channel, interaction.message.reference.messageId);
@@ -129,7 +130,7 @@ client.on(Discord.Events.InteractionCreate, async interaction => {
     }
 
     if(interaction.customId.startsWith("typing") || interaction.customId.startsWith("bot")) {
-        if(interaction.member.user.id !== interaction.customId.split("_")[1]) return interaction.reply({ ephemeral: true, embeds: [ fn.makeError(locale[lang].buttons.authoronly) ] })
+        if(interaction.member.user.id !== interaction.customId.split("_")[1]) return interaction.reply({ ephemeral: true, embeds: [ fn.makeError(locale[lang].buttons.authoronly, interaction) ] })
         const command = client.commands.get(interaction.values[0]);
 
         interaction.update({ embeds: [ fn.makeEmbed({

@@ -12,9 +12,9 @@ export default {
         let newWords = [];
         const wordCount = parseInt(args[0]);
 
-        if(wordCount < 0) return message.reply({ embeds: [ fn.makeError(locale[lang].commands.typetest.positivewordcount) ] });
-        if(wordCount < 10) return message.reply({ embeds: [ fn.makeError(locale[lang].commands.typetest.greaterthan10) ] });
-        if(wordCount >= 51) return message.reply({ embeds: [ fn.makeError(locale[lang].commands.typetest.lowerthan50) ] });
+        if(wordCount < 0) return message.reply({ embeds: [ fn.makeError(locale[lang].commands.typetest.positivewordcount, message) ] });
+        if(wordCount < 10) return message.reply({ embeds: [ fn.makeError(locale[lang].commands.typetest.greaterthan10, message) ] });
+        if(wordCount >= 51) return message.reply({ embeds: [ fn.makeError(locale[lang].commands.typetest.lowerthan50, message) ] });
     
         fn.loop(wordCount ? wordCount : 30, i => {
             let randomWord = fn.randomElement(locale[lang].words);
@@ -91,7 +91,7 @@ export default {
         });
 
         collector.on("end", collected => {
-            if(collected.size === 0) testMessage.edit({ embeds: [ fn.makeError(locale[lang].commands.typetest.timedout) ], files: [], components: [] });
+            if(collected.size === 0) testMessage.edit({ embeds: [ fn.makeError(locale[lang].commands.typetest.timedout, message) ], files: [], components: [] });
         });
     }
 }

@@ -8,12 +8,12 @@ export default {
         const lang = fn.db.guilds.get(message.guild.id);
         const providedId = parseFloat(args[0]);
         
-        if(!providedId) return message.reply({ embeds: [ fn.makeError(locale[lang].commands.gettest.provideid) ] });
-        if(providedId <= 0) return message.reply({ embeds: [ fn.makeError(locale[lang].commands.gettest.positivenumber) ] });
-        if(providedId % 1 !== 0) return message.reply({ embeds: [ fn.makeError(locale[lang].commands.gettest.wholenumber) ] });
+        if(!providedId) return message.reply({ embeds: [ fn.makeError(locale[lang].commands.gettest.provideid, message) ] });
+        if(providedId <= 0) return message.reply({ embeds: [ fn.makeError(locale[lang].commands.gettest.positivenumber, message) ] });
+        if(providedId % 1 !== 0) return message.reply({ embeds: [ fn.makeError(locale[lang].commands.gettest.wholenumber, message) ] });
 
         const test = fn.db.tests.getTestFromId(providedId);
-        if(!test) return message.reply({ embeds: [ fn.makeError(locale[lang].commands.gettest.doesntexist.replace("id", providedId)) ] })
+        if(!test) return message.reply({ embeds: [ fn.makeError(locale[lang].commands.gettest.doesntexist.replace("id", providedId), message) ] })
         const user = await fn.getUser(test.user);
 
         message.reply({ embeds: [

@@ -18,7 +18,7 @@ export default {
         });
 
         if(tests.count === 0) {
-            message.reply({ embeds: [ fn.makeError(locale[lang].commands.getprofile.noteststaken.replace("username", member.user.username)) ] });
+            message.reply({ embeds: [ fn.makeError(locale[lang].commands.getprofile.noteststaken.replace("username", member.user.username), message) ] });
         } else {
             embed.addFields(
                 { name: locale[lang].commands.getprofile.fields[0], value: tests.count.toString(), inline: true },

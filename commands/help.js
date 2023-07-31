@@ -15,7 +15,7 @@ export default {
             ] });
         } else {
             const command = client.commands.get(args[0]);
-            if(!command) return message.reply({ embeds: [ fn.makeError(locale[lang].commands.help.nocommand) ] });
+            if(!command) return message.reply({ embeds: [ fn.makeError(locale[lang].commands.help.nocommand, message) ] });
             message.reply({ embeds: [ fn.makeEmbed({
                 title: command.name,
                 description: command.description,
