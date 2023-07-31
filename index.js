@@ -1,9 +1,11 @@
 import { getCloseMatches } from "difflib";
 import fs from "node:fs";
 import Database from "better-sqlite3";
+import locale from "./locale.json" assert { type: "json" };
 
 globalThis.Discord = await import("discord.js");
 globalThis.database = new Database("data/data.db");
+globalThis.locale = locale;
 
 database.pragma("journal_mode = WAL");
 database.prepare(`
@@ -19,8 +21,14 @@ database.prepare(`
     )
 `).run();
 
-globalThis.fn = (await import("./functions.js")).default;
+database.prepare(`
+    CREATE TABLE IF NOT EXISTS guilds (
+        id INTEGER PRIMARY KEY,
+        lang TEXT NOT NULL DEFAULT "en"
+    )
+`).run();
 
+globalThis.fn = (await import("./functions.js")).default;
 globalThis.client = new Discord.Client({
     intents: [
         "Guilds",
@@ -43,10 +51,10 @@ client.once(Discord.Events.ClientReady, async () => {
     if(fs.existsSync("./data/restart.json")) {
         const restart = JSON.parse(fs.readFileSync("./data/restart.json", "utf8"));
         if(restart[0] && restart[1]) {
-            (await fn.getMessage(await fn.getChannel(restart[0]), restart[1])).edit({ embeds: [ fn.makeEmbed({ description: "Restarted successfully" }) ] })
+            (await fn.getMessage(await fn.getChannel(restart[0]), restart[1])).edit({ embeds: [ fn.makeEmbed({ description: locale[fn.db.guilds.get(restart[2])].commands.restart.restarted }) ] })
         }
     };
-
+    
     fn.typeWriterAnimation({
         text: "holy shit the\nType Test Bot is",
         speed: 15
@@ -63,8 +71,6 @@ for (const file of commandFiles) {
     if(!command.owner) client.commandList.push(command);
     for (const alias of command.aliases ?? []) client.commands.set(alias, command);
 }
-
-globalThis.words = [ "the", "be", "of", "and", "a", "to", "in", "he", "have", "it", "that", "for", "they", "I", "with", "as", "not", "on", "she", "at", "by", "this", "we", "you", "do", "but", "from", "or", "which", "one", "would", "all", "will", "there", "say", "who", "make", "when", "can", "more", "if", "no", "man", "out", "other", "so", "what", "time", "up", "go", "about", "than", "into", "could", "state", "only", "new", "year", "some", "take", "come", "these", "know", "see", "use", "get", "like", "then", "first", "any", "work", "now", "may", "such", "give", "over", "think", "most", "even", "find", "day", "also", "after", "way", "many", "must", "look", "before", "great", "back", "through", "long", "where", "much", "should", "well", "people", "down", "own", "just", "because", "good", "each", "those", "feel", "seem", "how", "high", "too", "place", "little", "world", "very", "still", "nation", "hand", "old", "life", "tell", "write", "become", "here", "show", "house", "both", "between", "need", "mean", "call", "develop", "under", "last", "right", "move", "thing", "general", "school", "never", "same", "another", "begin", "while", "number", "part", "turn", "real", "leave", "might", "want", "point", "form", "off", "child", "few", "small", "since", "against", "ask", "late", "home", "interest", "large", "person", "end", "open", "public", "follow", "during", "present", "without", "again", "hold", "govern", "around", "possible", "head", "consider", "word", "program", "problem", "however", "lead", "system", "set", "order", "eye", "plan", "run", "keep", "face", "fact", "group", "play", "stand", "increase", "early", "course", "change", "help", "line" ];
 
 client.on(Discord.Events.MessageCreate, async message => {
     if(!client.isReady() || message.author.bot) return;
@@ -91,22 +97,24 @@ client.on(Discord.Events.MessageCreate, async message => {
 });
 
 client.on(Discord.Events.InteractionCreate, async interaction => {
+    const lang = fn.db.guilds.get(interaction.guild.id);
+
     if(interaction.customId.startsWith("delete")) {
-        if(interaction.member.user.id !== interaction.customId.split("_")[1]) return interaction.reply({ ephemeral: true, embeds: [ fn.makeError("This button can only be used by the original author") ] });
+        if(interaction.member.user.id !== interaction.customId.split("_")[1]) return interaction.reply({ ephemeral: true, embeds: [ fn.makeError(locale[lang].buttons.authoronly) ] });
         fn.db.tests.removeTestById(interaction.customId.split("_")[2]);
 
-        interaction.message.edit({ components: [ fn.makeRow({ buttons: [{ label: "Delete Test", id: `delete`, style: "danger", disabled: true }] }) ] })
-        interaction.reply({ ephemeral: true, embeds: [ fn.makeEmbed({ description: "Deleted test from profile", title: "Test Deleted" }) ] })
+        interaction.message.edit({ components: [ fn.makeRow({ buttons: [{ label: locale[lang].buttons.deletetest.label, id: `delete`, style: "danger", disabled: true }] }) ] })
+        interaction.reply({ ephemeral: true, embeds: [ fn.makeEmbed({ description: locale[lang].buttons.deletetest.description, title: locale[lang].buttons.deletetest.title }) ] })
     }
-    if(interaction.customId === "nevermind") {
-        if(interaction.member.user.id !== interaction.customId.split("_")[1]) return interaction.reply({ ephemeral: true, embeds: [ fn.makeError("This button can only be used by the original author") ] });
+    if(interaction.customId.startsWith("nevermind")) {
+        if(interaction.member.user.id !== interaction.customId.split("_")[1]) return interaction.reply({ ephemeral: true, embeds: [ fn.makeError(locale[lang].buttons.authoronly) ] });
         interaction.deferUpdate();
 
         interaction.message.delete();
         (await fn.getMessage(interaction.message.channel, interaction.message.reference.messageId)).delete()
     }
     if(interaction.customId.startsWith("run_")) {
-        if(interaction.member.user.id !== interaction.customId.split("_")[2]) return interaction.reply({ ephemeral: true, embeds: [ fn.makeError("This button can only be used by the original author") ] }); 
+        if(interaction.member.user.id !== interaction.customId.split("_")[2]) return interaction.reply({ ephemeral: true, embeds: [ fn.makeError(locale[lang].buttons.authoronly) ] }); 
         interaction.deferUpdate();
 
         const msg = await fn.getMessage(interaction.message.channel, interaction.message.reference.messageId);
@@ -120,14 +128,16 @@ client.on(Discord.Events.InteractionCreate, async interaction => {
         interaction.message.delete();
     }
 
-    if(["typetest", "bot"].includes(interaction.customId)) {
+    if(interaction.customId.startsWith("typing") || interaction.customId.startsWith("bot")) {
+        if(interaction.member.user.id !== interaction.customId.split("_")[1]) return interaction.reply({ ephemeral: true, embeds: [ fn.makeError(locale[lang].buttons.authoronly) ] })
         const command = client.commands.get(interaction.values[0]);
+
         interaction.update({ embeds: [ fn.makeEmbed({
             title: command.name,
-            description: command.description,
+            description: locale[lang].commands[command.name].info.description,
             fields: [
-                [ "Usage", `\`t!${command.name}${command?.args ? " " : ""}${command?.args?.map(a => `[${a}]`)}\`` ],
-                [ "Aliases", command?.aliases?.map(a => `\`${a}\``).join(", ") ?? "None" ],
+                [ locale[lang].commands.help.usage, `\`t!${command.name}${locale[lang].commands[command.name].info?.args ? " " : ""}${locale[lang].commands[command.name].info?.args?.map(a => `[${a}]`)}\`` ],
+                [ locale[lang].commands.help.aliases, command?.aliases?.map(a => `\`${a}\``).join(", ") ?? locale[lang].commands.help.none ],
             ],
             footer: [ command.category ]
         }) ] });
