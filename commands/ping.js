@@ -2,7 +2,7 @@ export default {
     name: "ping",
     category: "bot",
     async execute(message, args) {
-        const lang = fn.db.guilds.get(message.guild.id);
+        const lang = fn.getLang(message);
 
         const before = Date.now();
         const ping = await message.reply({ embeds: [ fn.makeEmbed({

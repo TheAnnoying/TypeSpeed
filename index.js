@@ -28,6 +28,13 @@ database.prepare(`
     )
 `).run();
 
+database.prepare(`
+    CREATE TABLE IF NOT EXISTS users (
+        id INTEGER PRIMARY KEY,
+        lang TEXT NOT NULL DEFAULT "en"
+    )
+`).run();
+
 globalThis.fn = (await import("./functions.js")).default;
 globalThis.client = new Discord.Client({
     intents: [
@@ -76,7 +83,7 @@ client.on(Discord.Events.MessageCreate, async message => {
     if(!client.isReady() || message.author.bot) return;
 
     if(message.content.startsWith("t!")) {
-        const lang = fn.db.guilds.get(message.guild.id);
+        const lang = fn.getLang(message);
         const args = message.content.slice("t!".length).split(" ");
         const providedCommand = args.shift().toLowerCase();
 
@@ -98,7 +105,7 @@ client.on(Discord.Events.MessageCreate, async message => {
 });
 
 client.on(Discord.Events.InteractionCreate, async interaction => {
-    const lang = fn.db.guilds.get(interaction.guild.id);
+    const lang = fn.getLang(interaction);
 
     if(interaction.customId.startsWith("delete")) {
         if(interaction.member.user.id !== interaction.customId.split("_")[1]) return interaction.reply({ ephemeral: true, embeds: [ fn.makeError(locale[lang].buttons.authoronly, interaction) ] });

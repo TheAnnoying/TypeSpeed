@@ -16,7 +16,7 @@ export default {
     owner: true,
     aliases: [ "eval" ],
     async execute(message, args) {
-        const lang = fn.db.guilds.get(message.guild.id);
+        const lang = fn.getLang(message);
         
         let text = args.join(" ");
         if(!text) return message.reply({ embeds: [ fn.makeError(locale[lang].commands.eval.youmustprovidecode, message) ] });

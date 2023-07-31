@@ -86,6 +86,17 @@
                 "mistake": "mistake",
                 "mistakes": "mistakes",
                 "raw": "raw"
+            },
+            "setlanguage": {
+                "info": {
+                    "description": "Change the bot's language for the server you're in, execute in DMs to change your own language",
+                    "args": ["optional: lang, default: en"]
+                },
+                "noperms": "You must have the `Manage Guild` permission in order to edit this server's bot language",
+                "nosuchlanguage": "The bot does not support that language yet, supported languages:\nlangs",
+                "alreadyset": "The current language already is `currentlang`!",
+                "title": "Language Changed",
+                "descriptions": [ "Successfully changed this server's language to `newlang`", "Successfully changed your personal language to `newlang`" ]
             }
         },
         "buttons": {
@@ -184,6 +195,17 @@
                 "mistake": "טעות",
                 "mistakes": "טעויות",
                 "raw": "לא כולל טעויות"
+            },
+            "setlanguage": {
+                "info": {
+                    "description": "שנה את שפת הבוט לשרת זה, כתוב לו בפרטי כדי לשנות את השפה האישית",
+                    "args": ["רשות: שפה, ברירת מחדל: en"]
+                },
+                "noperms": "כדי לשנות את השפה של הבוט לשרת זה, חייב להיות לך את הגישה `Manage Guild`",
+                "nosuchlanguage": "הבוט לא כולל את השפה הזו עדיין, השפות הנוכחיות הן:\nlangs",
+                "alreadyset": "השפה המוגדרת היא כבר `currentlang`!",
+                "title": "שפה שונתה",
+                "descriptions": [ "שפת השרת הזה שונתה ל-`newlang` בהצלחה.", "השפה האישית שלך שונתה ל-`newlang` בהצלחה" ]
             }
         },
         "buttons": {

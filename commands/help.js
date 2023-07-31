@@ -3,15 +3,15 @@ export default {
     category: "bot",
     aliases: [ "h", "commands" ],
     async execute(message, args) {
-        const lang = fn.db.guilds.get(message.guild.id);
+        const lang = fn.getLang(message);
 
         if(args.length === 0) {
             message.reply({ embeds: [ fn.makeEmbed({
                 title: locale[lang].commands.help.title,
                 description: locale[lang].commands.help.description,
             }) ], components: [
-                fn.makeRow({ selectmenu: { id: `typing_${message.author.id}`, placeholder: locale[lang].commands.help.placeholders[0], options: client.commandList.filter(c => c.category === "typing").map(c => ({ name: c.name, value: c.name, description: c.description })) } }),
-                fn.makeRow({ selectmenu: { id: `bot_${message.author.id}`, placeholder: locale[lang].commands.help.placeholders[1], options: client.commandList.filter(c => c.category === "bot").map(c => ({ name: c.name, value: c.name, description: c.description })) } }),
+                fn.makeRow({ selectmenu: { id: `typing_${message.author.id}`, placeholder: locale[lang].commands.help.placeholders[0], options: client.commandList.filter(c => c.category === "typing").map(c => ({ name: c.name, value: c.name, description: locale[lang].commands?.[c.name]?.info?.description ?? c.description })) } }),
+                fn.makeRow({ selectmenu: { id: `bot_${message.author.id}`, placeholder: locale[lang].commands.help.placeholders[1], options: client.commandList.filter(c => c.category === "bot").map(c => ({ name: c.name, value: c.name, description: locale[lang].commands?.[c.name]?.info?.description ?? c.description})) } }),
             ] });
         } else {
             const command = client.commands.get(args[0]);

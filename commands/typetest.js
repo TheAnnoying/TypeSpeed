@@ -8,7 +8,7 @@ export default {
     category: "typing",
     aliases: [ "test", "starttest", "startest", "tt", "ypetest" ],
     async execute(message, args) {
-        const lang = fn.db.guilds.get(message.guild.id);
+        const lang = fn.getLang(message);
         let newWords = [];
         const wordCount = parseInt(args[0]);
 

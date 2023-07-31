@@ -5,7 +5,7 @@ export default {
     category: "typing",
     aliases: [ "getest", "findtest", "gt" ],
     async execute(message, args) {
-        const lang = fn.db.guilds.get(message.guild.id);
+        const lang = fn.getLang(message);
         const providedId = parseFloat(args[0]);
         
         if(!providedId) return message.reply({ embeds: [ fn.makeError(locale[lang].commands.gettest.provideid, message) ] });

@@ -3,7 +3,7 @@ export default {
     category: "typing",
     aliases: [ "getmember", "getp", "gp", "profile" ],
     async execute(message, args) {
-        const lang = fn.db.guilds.get(message.guild.id);
+        const lang = fn.getLang(message);
         const member = await fn.memberArg(args[0], { message });
         if (member instanceof Discord.Message) return;
 

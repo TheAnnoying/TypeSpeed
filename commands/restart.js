@@ -6,7 +6,7 @@ export default {
     owner: true,
     aliases: [ "reboot", "end", "kill" ],
     async execute(message, args) {
-        const lang = fn.db.guilds.get(message.guild.id);
+        const lang = fn.getLang(message);
         const msg = await message.reply({ embeds: [ fn.makeEmbed({ description: locale[lang].commands.restart.restarting }) ] });
 
         client.destroy();

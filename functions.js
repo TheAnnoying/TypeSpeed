@@ -72,11 +72,37 @@ const db = {
             FROM guilds
             WHERE id = ?
         `, "get", null, o => o?.lang ?? "en")
+    },
+    users: {
+        set: prepareDBAction(`
+            INSERT INTO users (id, lang)
+            VALUES (?, ?)
+            ON CONFLICT (id) DO UPDATE
+            SET lang = ?
+            WHERE id = ?
+        `, "run", (i, l) => [i, l, l, i]),
+        get: prepareDBAction(`
+            SELECT lang
+            FROM users
+            WHERE id = ?
+        `, "get", null, o => o?.lang ?? "en"),
+        delete: prepareDBAction(`
+            DELETE FROM users
+            WHERE id = ?
+        `, "run")
+    }
+}
+
+function getLang(message) {
+    if(db.users.get(message?.member?.user.id ?? message?.author.id) === db.guilds.get(message?.guild?.id)) {
+        return db.guilds.get(message?.guild?.id)
+    } else {
+        return db.users.get(message?.member?.user.id ?? message?.author.id);
     }
 }
 
 function makeError(description, message) {
-    const lang = db.guilds.get(message.guild.id);
+    const lang = getLang(message);
     return makeEmbed({ color: "#dd403a", author: [ locale[lang].error, "https://theannoying.dev/assets/error.png" ], description })
 }
 
@@ -214,4 +240,4 @@ function makeEmbed(data) {
     return embed;
 }
 
-export default { typeWriterAnimation, sleep, db, makeEmbed, loop, randomElement, createMember, memberArg, getChannel, getGuild, getMember, getMessage, getUser, getRole, getGuildEmoji, makeRow, makeError };
+export default { getLang, typeWriterAnimation, sleep, db, makeEmbed, loop, randomElement, createMember, memberArg, getChannel, getGuild, getMember, getMessage, getUser, getRole, getGuildEmoji, makeRow, makeError };
