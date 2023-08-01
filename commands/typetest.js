@@ -78,10 +78,11 @@ export default {
             if(accuracy <= 50) { embed.setFooter({ text: locale[lang].commands.typetest.lowaccuracy }); valid = false; }
             if(netWPM < 10) { embed.setFooter({ text: locale[lang].commands.typetest.lowwpm }); valid = false; };
 
-            if(valid) testID = fn.db.tests.add(message.member.user.id, netWPM, grossWPM, mistakeAmount, timeTook, accuracy);
-
-            embed.setFooter({ text: `ID: ${testID.toString()}` });
-            if(newWords.length <= 15) embed.setFooter({ text: `${testID}  •  ${locale[lang].commands.typetest.disclaimer}` });
+            if(valid) {
+                testID = fn.db.tests.add(message.member.user.id, netWPM, grossWPM, mistakeAmount, timeTook, accuracy);
+                embed.setFooter({ text: `ID: ${testID.toString()}` });
+                if(newWords.length <= 15) embed.setFooter({ text: `${testID}  •  ${locale[lang].commands.typetest.disclaimer}` });
+            }
         
             m.reply({ embeds: [ embed.addFields(
                 { name: "WPM", value: `${(netWPM.toFixed(0))}${grossWPM.toFixed(0) === netWPM.toFixed(0) ? "" : ` (${locale[lang].commands.typetest.raw}: ${grossWPM.toFixed(0)})`}` },
