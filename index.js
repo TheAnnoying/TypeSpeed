@@ -1,11 +1,10 @@
 import { getCloseMatches } from "difflib";
 import fs from "node:fs";
 import Database from "better-sqlite3";
-import locale from "./locale.json" assert { type: "json" };
 
 globalThis.Discord = await import("discord.js");
 globalThis.database = new Database("data/data.db");
-globalThis.locale = locale;
+globalThis.locale = JSON.parse(fs.readFileSync("./locale.json", "utf8"));;
 
 database.pragma("journal_mode = WAL");
 database.prepare(`
