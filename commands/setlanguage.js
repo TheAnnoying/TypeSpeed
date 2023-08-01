@@ -1,7 +1,7 @@
 export default {
     name: "setlanguage",
     category: "bot",
-    aliases: [ "language" ],
+    aliases: [ "language", "setlang" ],
     async execute(message, args) {
         let lang = fn.getLang(message);
         const languages = locale[lang].commands.setlanguage.languages;

@@ -89,8 +89,7 @@
             },
             "setlanguage": {
                 "info": {
-                    "description": "Change the bot's language for the server you're in, execute in DMs to change your own language",
-                    "args": ["optional: lang, default: en"]
+                    "description": "Change the bot's language for the server you're in, execute in DMs to change your own language"
                 },
                 "noperms": "You must have the `Manage Guild` permission in order to edit this server's bot language",
                 "title": "Select Language",
@@ -200,8 +199,7 @@
             },
             "setlanguage": {
                 "info": {
-                    "description": "שנה את שפת הבוט לשרת זה, כתוב לו בפרטי כדי לשנות את השפה האישית",
-                    "args": ["רשות: שפה, ברירת מחדל: en"]
+                    "description": "שנה את שפת הבוט לשרת זה, כתוב לו בפרטי כדי לשנות את השפה האישית"
                 },
                 "noperms": "כדי לשנות את השפה של הבוט לשרת זה, חייב להיות לך את הגישה `Manage Guild`",
                 "title": "בחר שפה",
