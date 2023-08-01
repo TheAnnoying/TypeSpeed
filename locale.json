@@ -95,7 +95,7 @@
                 "title": "Select Language",
                 "descriptions": [ "Select the new language the bot will use in this server", "Select the new language the bot will talk to you in" ],
                 "components": [ "Choose a language", "Reset (use server's language)" ],
-                "languages": { "en": "English", "he": "Hebrew" },
+                "languages": { "en": "English", "he": "Hebrew", "de": "German" },
                 "successtitle": "Language Changed",
                 "successdescriptions": [ "Successfully changed this server's language to `newlang`", "Successfully changed your personal language to `newlang`" ]
             }
@@ -146,8 +146,8 @@
                 },
                 "provideid": "חובה לספק ID של בדיקה",
                 "positivenumber": "חובה לספק מספר חיובי שהוא לא 0",
-                "wholenumber": "חובה לספק ID",
-                "doesntexist": "ה-ID `id` לא שייך לאף בדיקה"
+                "wholenumber": "חובה לספק מספר שלם",
+                "doesntexist": "ה-`id` ID לא שייך לאף בדיקה"
             },
             "help": {
                 "info": {
@@ -205,7 +205,7 @@
                 "title": "בחר שפה",
                 "descriptions": [ "בחר את השפה שהבוט ידבר בה בשרת זה", "בחר את השפה שהבוט ידבר אליך בה" ],
                 "components": [ "בחר שפה", "מחק העדפה (השתמש בשפה של השרת)" ],
-                "languages": { "en": "אנגלית (English)", "he": "עברית (Hebrew)" },
+                "languages": { "en": "אנגלית (English)", "he": "עברית (Hebrew)", "de": "גרמנית (German)" },
                 "successtitle": "שפה שונתה",
                 "successdescriptions": [ "שפת השרת הזה שונתה ל-`newlang` בהצלחה.", "השפה האישית שלך שונתה ל-`newlang` בהצלחה" ]
             }
@@ -216,6 +216,116 @@
                 "label": "מחק מבחן",
                 "title": "מבחן נמחק",
                 "description": "המבחן נמחק מהפרופיל"
+            }
+        } 
+    },
+    "de": {
+        "error": "Fehler",
+        "words": [ "der", "die", "das", "sein", "von", "und", "ein", "zu", "in", "er", "haben", "es", "dass", "für", "sie", "ich", "mit", "als", "nicht", "auf", "sie", "dort", "vor", "dieses", "wir", "du", "tun", "aber", "vom", "oder", "welches", "ein", "würde", "alle", "wollen", "über", "sagen", "wer", "machen", "wann", "können", "mehr", "wenn", "nein", "mann", "raus", "anderes", "so", "wieso", "Zeit", "hoch", "gehen", "über", "größer", "hinein", "könnten", "staat", "nur", "neu", "Jahr", "manche", "nehmen", "kommen", "diese", "wissen", "sehen", "benutzen", "bekommen", "wie", "dann", "zuerst", "irgendetwas", "arbeiten", "jetzt", "vielleicht", "solche", "geben", "über", "denken", "meist", "sogar", "finden", "Tag", "also", "danach", "Weg", "viele", "müssen", "gucken", "davor", "groß", "zurück", "durch", "lang", "wo", "viel", "sollten", "naja", "Leute", "unter", "besitzen", "doch", "weil", "gut", "jedes", "dieses", "fühlen", "sieht", "warum", "hoch", "auch", "platzieren", "wenig", "Welt", "sehr", "still", "Nation", "Hand", "alt", "Leben", "erzählen", "schreiben", "werden", "hier", "zeigen", "Haus", "beides", "dazwischen", "brauchen", "meinen", "anrufen", "entwickeln", "unter", "letztes", "rechts", "bewegen", "Ding", "generell", "Schule", "nie", "dasselbe", "anderer", "beginnen", "während", "Nummer", "Teil", "abbiegen", "real", "verschwinden", "müsste", "wollen", "Punkt", "Form", "aus", "Kind", "wenige", "klein", "seit", "gegen", "fragen", "spät", "zuhause", "interessiert", "fett", "Person", "beenden", "offen", "öffentlich", "folgen", "währenddessen", "präsent", "ohne", "wieder", "halten", "Rechte", "umrunden", "möglich", "Kopf", "entscheiden", "Wort", "Programm", "Problem", "obwohl", "leiten", "System", "setzen", "Ordnung", "Auge", "Plan", "rennen", "behalten", "Gesicht", "Fakt", "Gruppe", "spielen", "stehen", "inkrementieren", "früh", "Runde", "Veränderung", "helfen", "Linie" ],
+        "commands": {
+            "execution": {
+                "notfound": "Der Befehl `providedCommand` konnte nicht gefunden werden. Meintest du `closest`?",
+                "buttons": {
+                    "run": "Start",
+                    "delete": "Löschen"
+                },
+                "owneronly": "Dieser Befehle kann nur von dem Besitzer benutzt werden."
+            },
+            "eval": {
+                "info": {
+                    "description": "Code ausführen",
+                    "args": ["code"]
+                },
+                "youmustprovidecode": "Du musst den Code angeben, der ausgeführt werden soll."
+            },
+            "getprofile": {
+                "info": {
+                    "description": "Zeige Type Test-Informationen von jemandem.",
+                    "args": ["user"]
+                },
+                "author": "Type Test Profil",
+                "description": "member's profil",
+                "footer": "Letzter Test am",
+                "noteststaken": "`username` hat keine Tests durchgeführt!",
+                "fields": ["Durchgeführte Tests", "Durchschnittliche WPM"]
+            },
+            "gettest": {
+                "info": {
+                    "description": "Zeige Informationen von einem Type Test.",
+                    "args": ["test id"]
+                },
+                "provideid": "Du musst eine Test-ID angeben!",
+                "positivenumber": "Du musst eine positive Zahl angeben, die nicht 0 ist.",
+                "wholenumber": "Du musst eine ganze Zahl angeben.",
+                "doesntexist": "Die ID `id` gehört zu keinem Test."
+            },
+            "help": {
+                "info": {
+                    "description": "Zeige eine Liste von allen verfügbaren Bot-Befehlen.",
+                    "args": ["Optional: Befehlsname"]
+                },
+                "title": "Hilfsmenü",
+                "description": "Wähle einen Befehl um mehr Informationen über ihn zu sehen.",
+                "placeholders": ["Command von der Kategorie: typing", "Command von der Kategorie: bot"],
+                "nocommand": "Dieser Befehl existiert nicht.",
+                "usage": "Benutzung",
+                "aliases": "Aliase",
+                "none": "Keine"
+            },
+            "ping": {
+                "info": {
+                    "description": "Überprüfe den Bot's ping."
+                },
+                "titles": ["Pinging...", "Pingergebnisse"],
+                "fields": ["API-Latenz", "Bot-Latenz"]
+            },
+            "typetest": {
+                "info": {
+                    "description": "Starte einen Type Test",
+                    "args": ["Optional: word count, default: 30"]
+                },
+                "positivewordcount": "Die Wortanzahl muss positiv sein.",
+                "greaterthan10": "Die Wortanzahl muss größer oder gleich `10` sein.",
+                "lowerthan50": "Die Wortanzahl muss kleiner oder gleich `50` sein.",
+                "title": "Testergebnisse",
+                "description": "Informationen über deinen kürzlichen Type Test",
+                "cheated": "Dieser Benutzer hat wahrscheinlich geschummelt bei diesem Test.",
+                "lowaccuracy": "Ungültiger Test - geringe Genauigkeit",
+                "lowwpm": "Ungültiger Test - geringe WPM",
+                "disclaimer": "Eine geringe Wortanzahl kann in weniger genauen Testergebnissen resultieren.",
+                "timedout": "Zeitüberschreitung beim Test",
+                "timetook": "Zeit brauchte",
+                "accuracy": "Genauigkeit",
+                "mistake": "Fehler",
+                "mistakes": "Fehler",
+                "raw": "Roh"
+            },
+            "restart": {
+                "info": {
+                    "description": "Starte den Bot neu."
+                },
+                "restarting": "Neustart...",
+                "restarted": "Erfolgreich neugestartet."
+            },
+            "setlanguage": {
+                "info": {
+                    "description": "Ändere die Sprache für deinen Server, führe dies in DMs aus um nur deine Sprache zu ändern."
+                },
+                "noperms": "Du musst die `Manage Guild`-Berechtigung haben um die Sprache für diesen Server zu ändern.",
+                "title": "Wähle eine Sprache",
+                "descriptions": [ "Wähle die neue Sprache, die der Bot in diesem Server benutzt.", "Wähle die neue Sprache, die der Bot für dich benutzt." ],
+                "components": [ "Wähle eine Sprache", "Zurücksetzen (Serversprache benutzen)" ],
+                "languages": { "en": "Englisch (English)", "he": "Hebräisch (Hebrew)", "de": "Deutsch (German)" },
+                "successtitle": "Sprache verändert",
+                "successdescriptions": [ "Erfolgreich die Sprache dieses Servers verändert zu `newlang`", "Erfolgreich deine persönliche Sprache verändert zu `newlang`" ]
+            }
+        },
+        "buttons": {
+            "authoronly": "Dieser Knopf kann nur von dem ursprünglichen Autor benutzt werden.",
+            "deletetest": {
+                "label": "Test löschen",
+                "title": "Test gelöscht",
+                "description": "Test von Profil gelöscht."
             }
         } 
     }
