@@ -31,7 +31,7 @@ database.prepare(`
 database.prepare(`
     CREATE TABLE IF NOT EXISTS users (
         id INTEGER PRIMARY KEY,
-        lang TEXT NOT NULL DEFAULT "en"
+        lang TEXT
     )
 `).run();
 
@@ -134,6 +134,32 @@ client.on(Discord.Events.InteractionCreate, async interaction => {
 
         command.execute(msg, args, client);
         interaction.message.delete();
+    }
+
+    if(interaction.customId === "lang") {
+        const newLang = interaction.values[0];
+
+        if(interaction?.guild) {
+            fn.db.guilds.set(interaction?.guild?.id, newLang);
+            return interaction.update({
+                embeds: [ fn.makeEmbed({ title: locale[newLang].commands.setlanguage.successtitle, description: locale[newLang].commands.setlanguage.successdescriptions[0].replace("newlang", newLang) }) ],
+                components: []
+            });
+        } else {
+            fn.db.users.set(interaction.user.id, newLang);
+            interaction.update({
+                embeds: [ fn.makeEmbed({ title: locale[newLang].commands.setlanguage.successtitle, description: locale[newLang].commands.setlanguage.successdescriptions[1].replace("newlang", newLang) }) ],
+                components: []
+            });
+        }
+    }
+    if(interaction.customId === "resetlang") {
+        fn.db.users.delete(interaction.user.id);
+
+        return interaction.update({
+            embeds: [ fn.makeEmbed({ title: "Removed Language", description: "Successfully removed your language, it will now be decided by the server you're running commands from" }) ],
+            components: []
+        });
     }
 
     if(interaction.customId.startsWith("typing") || interaction.customId.startsWith("bot")) {

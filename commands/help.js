@@ -4,7 +4,7 @@ export default {
     aliases: [ "h", "commands" ],
     async execute(message, args) {
         const lang = fn.getLang(message);
-
+        
         if(args.length === 0) {
             message.reply({ embeds: [ fn.makeEmbed({
                 title: locale[lang].commands.help.title,

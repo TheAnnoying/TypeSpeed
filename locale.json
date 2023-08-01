@@ -93,10 +93,12 @@
                     "args": ["optional: lang, default: en"]
                 },
                 "noperms": "You must have the `Manage Guild` permission in order to edit this server's bot language",
-                "nosuchlanguage": "The bot does not support that language yet, supported languages:\nlangs",
-                "alreadyset": "The current language already is `currentlang`!",
-                "title": "Language Changed",
-                "descriptions": [ "Successfully changed this server's language to `newlang`", "Successfully changed your personal language to `newlang`" ]
+                "title": "Select Language",
+                "descriptions": [ "Select the new language the bot will use in this server", "Select the new language the bot will talk to you in" ],
+                "components": [ "Choose a language", "Reset (use server's language)" ],
+                "languages": { "en": "English", "he": "Hebrew" },
+                "successtitle": "Language Changed",
+                "successdescriptions": [ "Successfully changed this server's language to `newlang`", "Successfully changed your personal language to `newlang`" ]
             }
         },
         "buttons": {
@@ -202,10 +204,12 @@
                     "args": ["רשות: שפה, ברירת מחדל: en"]
                 },
                 "noperms": "כדי לשנות את השפה של הבוט לשרת זה, חייב להיות לך את הגישה `Manage Guild`",
-                "nosuchlanguage": "הבוט לא כולל את השפה הזו עדיין, השפות הנוכחיות הן:\nlangs",
-                "alreadyset": "השפה המוגדרת היא כבר `currentlang`!",
-                "title": "שפה שונתה",
-                "descriptions": [ "שפת השרת הזה שונתה ל-`newlang` בהצלחה.", "השפה האישית שלך שונתה ל-`newlang` בהצלחה" ]
+                "title": "בחר שפה",
+                "descriptions": [ "בחר את השפה שהבוט ידבר בה בשרת זה", "בחר את השפה שהבוט ידבר אליך בה" ],
+                "components": [ "בחר שפה", "מחק העדפה (השתמש בשפה של השרת)" ],
+                "languages": { "en": "אנגלית (English)", "he": "עברית (Hebrew)" },
+                "successtitle": "שפה שונתה",
+                "successdescriptions": [ "שפת השרת הזה שונתה ל-`newlang` בהצלחה.", "השפה האישית שלך שונתה ל-`newlang` בהצלחה" ]
             }
         },
         "buttons": {

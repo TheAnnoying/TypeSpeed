@@ -85,7 +85,7 @@ const db = {
             SELECT lang
             FROM users
             WHERE id = ?
-        `, "get", null, o => o?.lang ?? "en"),
+        `, "get", null, o => o?.lang),
         delete: prepareDBAction(`
             DELETE FROM users
             WHERE id = ?
@@ -94,11 +94,12 @@ const db = {
 }
 
 function getLang(message) {
-    if(db.users.get(message?.member?.user.id ?? message?.author.id) === db.guilds.get(message?.guild?.id)) {
-        return db.guilds.get(message?.guild?.id)
-    } else {
-        return db.users.get(message?.member?.user.id ?? message?.author.id);
-    }
+    const userLang = db.users.get(message?.author?.id ?? message?.user?.id ?? message?.member?.user?.id);
+    const guildLang = db.guilds.get(message?.guild?.id);
+
+    if(userLang) {
+        return userLang;
+    } else return guildLang;
 }
 
 function makeError(description, message) {
