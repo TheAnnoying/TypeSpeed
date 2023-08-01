@@ -141,13 +141,13 @@ client.on(Discord.Events.InteractionCreate, async interaction => {
         if(interaction?.guild) {
             fn.db.guilds.set(interaction?.guild?.id, newLang);
             return interaction.update({
-                embeds: [ fn.makeEmbed({ title: locale[newLang].commands.setlanguage.successtitle, description: locale[newLang].commands.setlanguage.successdescriptions[0].replace("newlang", newLang) }) ],
+                embeds: [ fn.makeEmbed({ title: locale[newLang].commands.setlanguage.successtitle, description: locale[newLang].commands.setlanguage.successdescriptions[0].replace("newlang", locale[newLang].commands.setlanguage.languages[newLang]) }) ],
                 components: []
             });
         } else {
             fn.db.users.set(interaction.user.id, newLang);
             interaction.update({
-                embeds: [ fn.makeEmbed({ title: locale[newLang].commands.setlanguage.successtitle, description: locale[newLang].commands.setlanguage.successdescriptions[1].replace("newlang", newLang) }) ],
+                embeds: [ fn.makeEmbed({ title: locale[newLang].commands.setlanguage.successtitle, description: locale[newLang].commands.setlanguage.successdescriptions[1].replace("newlang", locale[newLang].commands.setlanguage.languages[newLang]) }) ],
                 components: []
             });
         }
