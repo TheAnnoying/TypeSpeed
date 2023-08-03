@@ -43,7 +43,7 @@ export default {
 
         const testMessage = await message.reply({ embeds: [ fn.makeEmbed({ image: "https://i.makeagif.com/media/5-15-2017/L-fkeJ.gif" }) ] });
 
-        await fn.sleep(6000);
+        await fn.sleep(6500);
 
         testMessage.edit({
             embeds: [],
