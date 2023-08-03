@@ -135,10 +135,13 @@ client.on(Discord.Events.InteractionCreate, async interaction => {
         interaction.message.delete();
     }
 
-    if(interaction.customId === "lang") {
+    if(interaction.customId.startsWith("lang")) {
+        const lang = fn.getLang(interaction);
         const newLang = interaction.values[0];
 
-        if(interaction?.guild) {
+        if(interaction?.guild) { 
+            if(interaction.member.user.id !== interaction.customId.split("_")[1]) return interaction.reply({ ephemeral: true, embeds: [ fn.makeError(locale[lang].buttons.authoronly, interaction) ] }); 
+
             fn.db.guilds.set(interaction?.guild?.id, newLang);
             return interaction.update({
                 embeds: [ fn.makeEmbed({ title: locale[newLang].commands.setlanguage.successtitle, description: locale[newLang].commands.setlanguage.successdescriptions[0].replace("newlang", locale[newLang].commands.setlanguage.languages[newLang]) }) ],

@@ -13,7 +13,7 @@ export default {
 
             message.reply({
                 embeds: [ fn.makeEmbed({ title: locale[lang].commands.setlanguage.title, description: locale[lang].commands.setlanguage.descriptions[0] }) ],
-                components: [ fn.makeRow({ selectmenu: { id: "lang", placeholder: locale[lang].commands.setlanguage.components[0], options } }) ]
+                components: [ fn.makeRow({ selectmenu: { id: `lang_${message.author.id}`, placeholder: locale[lang].commands.setlanguage.components[0], options } }) ]
             });
         } else {
             message.reply({
