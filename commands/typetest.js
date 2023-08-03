@@ -41,7 +41,12 @@ export default {
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(text, 12, 12);
 
-        const testMessage = await message.reply({
+        const testMessage = await message.reply({ embeds: [ fn.makeEmbed({ image: "https://i.makeagif.com/media/5-15-2017/L-fkeJ.gif" }) ] });
+
+        await fn.sleep(6000);
+
+        testMessage.edit({
+            embeds: [],
             files: [
                 new Discord.AttachmentBuilder(await canvas.png, {
                     name: "typetest.png",
