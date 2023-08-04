@@ -27,7 +27,7 @@
                 "description": "member's profile",
                 "footer": "Latest test on",
                 "noteststaken": "`username` hasn't taken any tests!",
-                "fields": ["Tests Taken", "Average WPM"]
+                "fields": ["Tests Taken", "Average WPM", "Best WPM"]
             },
             "gettest": {
                 "info": {
@@ -130,14 +130,14 @@
             },
             "getprofile": {
                 "info": {
-                    "description": "הצג מידע הקשור לבדיקות הקלדה",
+                    "description": "הצג את פרופיל ההקלדה של אדם",
                     "args": ["משתמש"]
                 },
                 "author": "פרופיל הקלדה",
                 "description": "הפרופיל של member",
                 "footer": "בדיקה אחרונה ב-",
                 "noteststaken": "`username` לא עבר שום בדיקה",
-                "fields": ["כמות בדיקות", "WPM ממוצע"]
+                "fields": ["כמות בדיקות", "WPM ממוצע", "WPM הטוב ביותר"]
             },
             "gettest": {
                 "info": {
@@ -247,7 +247,7 @@
                 "description": "member's profil",
                 "footer": "Letzter Test am",
                 "noteststaken": "`username` hat keine Tests durchgeführt!",
-                "fields": ["Durchgeführte Tests", "Durchschnittliche WPM"]
+                "fields": ["Durchgeführte Tests", "Durchschnittliche WPM", "Bestes WPM"]
             },
             "gettest": {
                 "info": {

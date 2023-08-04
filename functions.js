@@ -50,7 +50,7 @@ const db = {
             WHERE id = ?
         `, "get"),
         getTestsFromUser: prepareDBAction(`
-            SELECT COUNT(id) AS count, FLOOR(AVG(wpm)) AS average, MAX(time) AS latest
+            SELECT COUNT(id) AS count, FLOOR(AVG(wpm)) AS average, MAX(time) AS latest, MAX(wpm) AS bestwpm
             FROM tests
             WHERE user = ?
         `, "get"),
@@ -188,7 +188,7 @@ async function memberArg(item, data) {
                 if(!data.noText) try {
                     const parts = item.match(/(.+?)(#\d{4}$)?$/);
                     const members = await data.message.guild.members.search({ query: parts[1] });
-                    const found = members.find(member => member.user.username.toLowerCase() === item || member.nickname?.toLowerCase() === item);
+                    const found = members.find(member => member.user.username.toLowerCase() === item || member.nickname?.toLowerCase() === item || member.displayName.toLowerCase());
                     if(found) member = found;
                 } catch {};
             }
@@ -236,7 +236,7 @@ function makeEmbed(data) {
     if (data.image) embed.setImage(data.image);
     if (data.timestamp) embed.setTimestamp(data.timestamp);
     if (data.field) embed.addFields({ name: data.field[0], value: data.field[1], inline: data.field[2] });
-    if (data.fields) embed.addFields(data.fields.map(e => ({ name: e[0], value: e[1], inline: e[2] })));
+    if (data.fields) embed.addFields(data.fields.map(e => ({ name: e[0], value: e[1], inline: e[2] ?? false })));
     embed.setColor(data.color ?? "#A0B8C0");
     return embed;
 }

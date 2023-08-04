@@ -22,7 +22,8 @@ export default {
         } else {
             embed.addFields(
                 { name: locale[lang].commands.getprofile.fields[0], value: tests.count.toString(), inline: true },
-                { name: locale[lang].commands.getprofile.fields[1], value: tests.average.toString(), inline: true }
+                { name: locale[lang].commands.getprofile.fields[1], value: tests.average.toString(), inline: true },
+                { name: locale[lang].commands.getprofile.fields[2], value: tests.bestwpm.toString(), inline: true }
             )
 
             message.reply({ embeds: [ embed ] });
