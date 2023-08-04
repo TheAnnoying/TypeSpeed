@@ -222,7 +222,7 @@ function createMember(user) {
     Object.defineProperty(member, "displayColor", {
         get: () => 0
     });
-    return member
+    return member;
 }
 
 function makeEmbed(data) {
