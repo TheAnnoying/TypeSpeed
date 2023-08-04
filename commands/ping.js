@@ -1,7 +1,7 @@
 export default {
     name: "ping",
     category: "bot",
-    async execute(message, args) {
+    async execute(message) {
         const lang = fn.getLang(message);
 
         const before = Date.now();

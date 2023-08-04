@@ -5,7 +5,7 @@ export default {
     category: "bot",
     owner: true,
     aliases: [ "reboot", "end", "kill" ],
-    async execute(message, args) {
+    async execute(message) {
         const lang = fn.getLang(message);
         const msg = await message.reply({ embeds: [ fn.makeEmbed({ description: locale[lang].commands.restart.restarting }) ] });
 
