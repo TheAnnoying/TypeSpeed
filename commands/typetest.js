@@ -6,7 +6,7 @@ import ms from "ms";
 export default {
     name: "typetest",
     category: "typing",
-    aliases: [ "test", "starttest", "startest", "tt", "ypetest" ],
+    aliases: [ "test", "starttest", "startest", "tt", "testmytypingspeed" ],
     async execute(message, args) {
         const lang = fn.getLang(message);
         let newWords = [];
@@ -43,8 +43,10 @@ export default {
 
         const testMessage = await message.reply({ embeds: [ fn.makeEmbed({ image: "https://i.makeagif.com/media/5-15-2017/L-fkeJ.gif" }) ] });
 
-        await fn.sleep(6500);
+        await fn.sleep(6000);
 
+        let timeTookMessageToSend;
+        const preCounter = Date.now();
         testMessage.edit({
             embeds: [],
             files: [
@@ -54,9 +56,9 @@ export default {
                     height: canvas.height
                 })
             ],
-        });
+        }).then(() => timeTookMessageToSend = Date.now() - preCounter);
 
-        const currentTime = new Date().getTime();
+        const currentTime = Date.now();
         const collector = message.channel.createMessageCollector({ 
             filter: (m => m.author.id == message.author.id), 
             time: 120_000,
@@ -64,7 +66,7 @@ export default {
         });
 
         collector.on("collect", m => {
-            let timeTook = (new Date() - currentTime);
+            let timeTook = (Date.now() - currentTime - timeTookMessageToSend);
 
             const grossWPM = (m.content.length/5)/(timeTook/60000);
             const mistakeAmount = levenshtein.get(newWords.join(" "), m.content);
