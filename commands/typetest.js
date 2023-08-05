@@ -41,9 +41,9 @@ export default {
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(text, 12, 12);
 
-        const testMessage = await message.reply({ embeds: [ fn.makeEmbed({ image: "https://i.makeagif.com/media/5-15-2017/L-fkeJ.gif" }) ] });
+        const testMessage = await message.reply({ embeds: [ fn.makeEmbed({ thumbnail: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ3pzZWk0bTExc3RmZWwwOGFlZnhydHhiOXB6ZzhqdG5oeGU2bDg0eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/RiEW6mSQqjRiDy51MI/giphy.gif" }) ] });
 
-        await fn.sleep(6000);
+        await fn.sleep(3500);
 
         let timeTookMessageToSend;
         const preCounter = Date.now();
@@ -86,7 +86,7 @@ export default {
             if(netWPM < 10) { embed.setFooter({ text: locale[lang].commands.typetest.lowwpm }); valid = false; };
 
             if(valid) {
-                testID = fn.db.tests.add(message.member.user.id, netWPM, grossWPM, mistakeAmount, timeTook, accuracy);
+                testID = fn.db.tests.add(message.member.user.id, netWPM, grossWPM, mistakeAmount, timeTook, accuracy, lang);
                 embed.setFooter({ text: `ID: ${testID.toString()}` });
                 if(newWords.length <= 15) embed.setFooter({ text: `${testID}  •  ${locale[lang].commands.typetest.disclaimer}` });
             }
@@ -95,7 +95,7 @@ export default {
                 { name: "WPM", value: `${(netWPM.toFixed(0))}${grossWPM.toFixed(0) === netWPM.toFixed(0) ? "" : ` (${locale[lang].commands.typetest.raw}: ${grossWPM.toFixed(0)})`}` },
                 { name: locale[lang].commands.typetest.timetook, value: ms(timeTook), inline: true },
                 { name: locale[lang].commands.typetest.accuracy, value: `${accuracy}%${accuracy === 100 ? "" : ` (${mistakeAmount} ${mistakeAmount === 1 ? locale[lang].commands.typetest.mistake : locale[lang].commands.typetest.mistakes})`}`, inline: true }
-            ) ], components: [ fn.makeRow({ buttons: [{ label: locale[lang].buttons.deletetest.label, id: `delete_${message.member.user.id}_${testID}`, style: "danger", disabled: valid ? false : true }] })] });
+            ) ], components: [ fn.makeRow({ buttons: [{ label: locale[lang].buttons.deletetest.label, id: `delete_${testID}`, style: "danger", disabled: valid ? false : true }] })] });
         });
 
         collector.on("end", collected => {
