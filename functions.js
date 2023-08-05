@@ -41,8 +41,8 @@ function typeWriterAnimation(data = {}, callback) {
 const db = {
     tests: {
         add: prepareDBAction(`
-            INSERT INTO tests (user, wpm, grosswpm, mistakes, timetook, accuracy, time)
-            VALUES (?, FLOOR(?), FLOOR(?), ?, ?, ?, strftime('%s', 'now')*1000)
+            INSERT INTO tests (user, wpm, grosswpm, mistakes, timetook, accuracy, time, lang)
+            VALUES (?, FLOOR(?), FLOOR(?), ?, ?, ?, strftime('%s', 'now')*1000, ?)
         `, "run", null, o => o.lastInsertRowid),
         getTestFromId: prepareDBAction(`
             SELECT *

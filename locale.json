@@ -37,7 +37,9 @@
                 "provideid": "You must provide a test ID",
                 "positivenumber": "You must provide a positive number that isn't 0",
                 "wholenumber": "You must provide a whole number",
-                "doesntexist": "The ID `id` does not belong to any test"
+                "doesntexist": "The ID `id` does not belong to any test",
+                "language": "Language",
+                "unknown": "Unknown"
             },
             "help": {
                 "info": {
@@ -103,6 +105,7 @@
         "buttons": {
             "authoronly": "This button can only be used by the original author",
             "deletetest": {
+                "testmakeronly": "Only the person who took the test can delete it",
                 "label": "Delete Test",
                 "title": "Test Deleted",
                 "description": "Deleted test from profile"
@@ -147,7 +150,9 @@
                 "provideid": "חובה לספק ID של בדיקה",
                 "positivenumber": "חובה לספק מספר חיובי שהוא לא 0",
                 "wholenumber": "חובה לספק מספר שלם",
-                "doesntexist": "ה-`id` ID לא שייך לאף בדיקה"
+                "doesntexist": "ה-`id` ID לא שייך לאף בדיקה",
+                "language": "שפה",
+                "unknown": "לא ידוע"
             },
             "help": {
                 "info": {
@@ -213,6 +218,7 @@
         "buttons": {
             "authoronly": "הכפתור הזה יכול לשמש רק את המשתמש המקורי",
             "deletetest": {
+                "testmakeronly": "רק מי שלקח את הבדיקה הזו יכול למחוק אותה",
                 "label": "מחק מבחן",
                 "title": "מבחן נמחק",
                 "description": "המבחן נמחק מהפרופיל"
@@ -257,7 +263,9 @@
                 "provideid": "Du musst eine Test-ID angeben!",
                 "positivenumber": "Du musst eine positive Zahl angeben, die nicht 0 ist.",
                 "wholenumber": "Du musst eine ganze Zahl angeben.",
-                "doesntexist": "Die ID `id` gehört zu keinem Test."
+                "doesntexist": "Die ID `id` gehört zu keinem Test.",
+                "language": "Sprache",
+                "unknown": "Unbekannt"
             },
             "help": {
                 "info": {
@@ -323,6 +331,7 @@
         "buttons": {
             "authoronly": "Dieser Knopf kann nur von dem ursprünglichen Autor benutzt werden.",
             "deletetest": {
+                "testmakeronly": "Nur die Person, die den Test gemacht hat, kann ihn löschen",
                 "label": "Test löschen",
                 "title": "Test gelöscht",
                 "description": "Test von Profil gelöscht."

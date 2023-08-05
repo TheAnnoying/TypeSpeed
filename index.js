@@ -16,7 +16,8 @@ database.prepare(`
         mistakes INTEGER NOT NULL,
         timetook FLOAT NOT NULL,
         accuracy INTEGER NOT NULL,
-        time INTEGER NOT NULL
+        time INTEGER NOT NULL,
+        lang TEXT
     )
 `).run();
 
@@ -79,9 +80,17 @@ for (const file of commandFiles) {
 }
 
 client.on(Discord.Events.MessageCreate, async message => {
-    if(!client.isReady() || message.author.bot) return;
+    if(!client.isReady()) return;
 
     if(message.content.startsWith("t!")) {
+        if(message.author.bot && message.author.id !== client.user.id) {
+            message.reply({ content: "bruh those are not for us" });
+            await fn.sleep(1700);
+            message.channel.send({ content: "only for regular users"});
+            await fn.sleep(4000);
+            return message.channel.send({ content: "hit me up some day if you wanna do something together"});
+        }
+
         const lang = fn.getLang(message);
         const args = message.content.slice("t!".length).split(" ");
         const providedCommand = args.shift().toLowerCase();
@@ -107,8 +116,8 @@ client.on(Discord.Events.InteractionCreate, async interaction => {
     const lang = fn.getLang(interaction);
 
     if(interaction.customId.startsWith("delete")) {
-        if(interaction.member.user.id !== interaction.customId.split("_")[1]) return interaction.reply({ ephemeral: true, embeds: [ fn.makeError(locale[lang].buttons.authoronly, interaction) ] });
-        fn.db.tests.removeTestById(interaction.customId.split("_")[2]);
+        if(interaction.member.user.id !== fn.db.tests.getTestFromId(interaction.customId.split("_")[1]).user) return interaction.reply({ ephemeral: true, embeds: [ fn.makeError(locale[lang].buttons.deletetest.testmakeronly, interaction) ] });
+        fn.db.tests.removeTestById(interaction.customId.split("_")[1]);
 
         interaction.message.edit({ components: [ fn.makeRow({ buttons: [{ label: locale[lang].buttons.deletetest.label, id: `delete`, style: "danger", disabled: true }] }) ] })
         interaction.reply({ ephemeral: true, embeds: [ fn.makeEmbed({ description: locale[lang].buttons.deletetest.description, title: locale[lang].buttons.deletetest.title }) ] })

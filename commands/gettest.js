@@ -21,12 +21,13 @@ export default {
                 author: [ user.username, user.displayAvatarURL({ dynamic: true }) ],
                 fields: [
                     [ "WPM", `${test.wpm}${test.grosswpm === test.wpm ? "" : ` (${locale[lang].commands.typetest.raw}: ${test.grosswpm})`}` ],
+                    [ locale[lang].commands.gettest.language, locale[lang].commands.setlanguage.languages[test.lang] ?? locale[lang].commands.gettest.unknown, true ],
                     [ locale[lang].commands.typetest.timetook, ms(test.timetook), true ],
                     [ locale[lang].commands.typetest.accuracy, `${test.accuracy}%${test.accuracy === 100 ? "" : ` (${test.mistakes} ${test.mistakes === 1 ? locale[lang].commands.typetest.mistake : locale[lang].commands.typetest.mistakes})`}`, true ]
                 ],
                 footer: [ `ID: ${test.id.toString()}` ],
                 timestamp: test.time
             })
-        ], components: [ fn.makeRow({ buttons: [{ label: locale[lang].buttons.deletetest.label, id: `delete_${message.member.user.id}_${test.id}`, style: "danger" }] }) ] });
+        ], components: [ fn.makeRow({ buttons: [{ label: locale[lang].buttons.deletetest.label, id: `delete_${test.id}`, style: "danger" }] }) ] });
     }
 }
