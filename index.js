@@ -138,7 +138,7 @@ client.on(Discord.Events.InteractionCreate, async interaction => {
 
         if(args.length === 1 && ["help", "h"].includes(args[0])) {
             msg.content = `t!help ${command.name}`;
-            client.commands.get("help").execute(message, [ command.name ]);
+            client.commands.get("help").execute(msg, [ command.name ]);
         } else command.execute(msg, args, client);
 
         interaction.message.delete();
