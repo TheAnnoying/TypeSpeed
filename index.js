@@ -80,17 +80,9 @@ for (const file of commandFiles) {
 }
 
 client.on(Discord.Events.MessageCreate, async message => {
-    if(!client.isReady()) return;
+    if(!client.isReady() || message.author.bot) return;
 
     if(message.content.startsWith("t!")) {
-        if(message.author.bot && message.author.id !== client.user.id) {
-            message.reply({ content: "bruh those are not for us" });
-            await fn.sleep(1700);
-            message.channel.send({ content: "only for regular users"});
-            await fn.sleep(4000);
-            return message.channel.send({ content: "hit me up some day if you wanna do something together"});
-        }
-
         const lang = fn.getLang(message);
         const args = message.content.slice("t!".length).split(" ");
         const providedCommand = args.shift().toLowerCase();
@@ -107,7 +99,11 @@ client.on(Discord.Events.MessageCreate, async message => {
                 await client.application.fetch();
                 if(message.author.id !== client.application.owner.id) return message.reply({ embeds: [ fn.makeError(locale[lang].commands.execution.owneronly, message) ] });
             }
-            command.execute(message, args);
+
+            if(args.length === 1 && ["help", "h"].includes(args[0])) {
+                message.content = `t!help ${command.name}`;
+                client.commands.get("help").execute(message, [ command.name ]);
+            } else command.execute(message, args, client);
         };
     }
 });
@@ -140,7 +136,11 @@ client.on(Discord.Events.InteractionCreate, async interaction => {
         
         const command = client.commands.get(providedCommand);
 
-        command.execute(msg, args, client);
+        if(args.length === 1 && ["help", "h"].includes(args[0])) {
+            msg.content = `t!help ${command.name}`;
+            client.commands.get("help").execute(message, [ command.name ]);
+        } else command.execute(msg, args, client);
+
         interaction.message.delete();
     }
 
