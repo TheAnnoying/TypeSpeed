@@ -1,7 +1,7 @@
 export default {
     name: "help",
     category: "bot",
-    aliases: [ "h", "commands" ],
+    aliases: [ "h", "commands", "hlp" ],
     async execute(message, args) {
         const lang = fn.getLang(message);
         
