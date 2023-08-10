@@ -189,4 +189,4 @@ client.on(Discord.Events.InteractionCreate, async interaction => {
     }
 });
 
-client.login("MTEwNjkxNDY2NTM2MTA1NTkxNA.GOOqFp.7wUkbP49bDqOSTpt4CHVWclPdEU0ZBc_FSFPVY");
+client.login("MTEwNjkxNDY2NTM2MTA1NTkxNA.Gh9uO_.DTr42TMzjdG3gAG4ZvNoj1X5cdOdNmL80rWYyk");
