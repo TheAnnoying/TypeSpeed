@@ -2,9 +2,9 @@
   "exports": "./index.js",
   "type": "module",
   "dependencies": {
-    "better-sqlite3": "^8.5.0",
+    "better-sqlite3": "^8.5.1",
     "difflib": "^0.2.4",
-    "discord.js": "^14.12.1",
+    "discord.js": "^14.13.0",
     "fast-levenshtein": "^3.0.0",
     "ms": "^2.1.3",
     "skia-canvas-draw-text": "^1.0.3"
