@@ -1,6 +1,9 @@
 import { getCloseMatches } from "difflib";
 import fs from "node:fs";
 import Database from "better-sqlite3";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 globalThis.Discord = await import("discord.js");
 globalThis.database = new Database("data/data.db");
@@ -189,4 +192,4 @@ client.on(Discord.Events.InteractionCreate, async interaction => {
     }
 });
 
-client.login("MTEwNjkxNDY2NTM2MTA1NTkxNA.Gh9uO_.DTr42TMzjdG3gAG4ZvNoj1X5cdOdNmL80rWYyk");
+client.login(process.env.TOKEN);
