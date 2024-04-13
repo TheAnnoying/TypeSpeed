@@ -16,13 +16,15 @@ export default {
         } else {
             const command = client.commands.get(args[0]);
             if(!command) return message.reply({ embeds: [ fn.makeError(locale[lang].commands.help.nocommand, message) ] });
+
             message.reply({ embeds: [ fn.makeEmbed({
                 title: command.name,
-                description: command.description,
+                description: locale[lang].commands[command.name].info.description,
                 fields: [
                     [ locale[lang].commands.help.usage, `\`t!${command.name}${locale[lang].commands[command.name].info?.args ? " " : ""}${locale[lang].commands[command.name].info?.args?.map(a => `[${a}]`) ?? ""}\`` ],
-                    [ locale[lang].commands.help.aliases, command?.aliases?.map(a => `\`${a}\``).join(", ") ?? locale[lang].commands.help.none ]
-                ]
+                    [ locale[lang].commands.help.aliases, command?.aliases?.map(a => `\`${a}\``).join(", ") ?? locale[lang].commands.help.none ],
+                ],
+                footer: [ command.category ]
             }) ] });
         }
     }
