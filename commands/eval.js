@@ -44,11 +44,9 @@ export default {
             console3.log(await eval(`(async () => {try {return await (async () => {${text.includes("return") || text.includes("console.log") ? text : "return " + text}})()} catch(err) {return err}})()`));
 
             if (text.includes("return") || !text.includes("console.log")) out += evalOut._read();
-            out = out.trim().replaceAll("MTEwNjkxNDY2NTM2MTA1NTkxNA.GOOqFp.7wUkbP49bDqOSTpt4CHVWclPdEU0ZBc_FSFPVY", "TOKEN_REDACTED");
+            out = out.trim().replaceAll(process.env.TOKEN, "TOKEN_REDACTED");
             if (out.length > 4086) {
-                return message.reply({
-                    files: [ new Discord.AttachmentBuilder(Buffer.from(out, "utf8"), { name: "eval.js" }) ]
-                });
+                return message.reply({ files: [ new Discord.AttachmentBuilder(Buffer.from(out, "utf8"), { name: "eval.js" }) ] });
             }
             if (out === "null") return;
             message.reply({ embeds: [ fn.makeEmbed({ description: `\`\`\`js\n${out}\`\`\`` }) ] });
