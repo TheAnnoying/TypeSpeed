@@ -1,5 +1,5 @@
 import { drawText } from "skia-canvas-draw-text";
-import { Canvas } from "skia-canvas"
+import { Canvas } from "skia-canvas";
 import levenshtein from "fast-levenshtein";
 import ms from "ms";
 
