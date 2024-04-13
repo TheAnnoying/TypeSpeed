@@ -1,5 +1,3 @@
-import Discord from "discord.js";
-
 const sleep = (await import("node:timers/promises")).setTimeout;
 
 String.prototype.limit = function(l = 128) {
