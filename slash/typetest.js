@@ -5,16 +5,17 @@ import ms from "ms";
 
 export default {
     name: "typetest",
-    category: "typing",
-    aliases: [ "test", "starttest", "startest", "tt", "testmytypingspeed" ],
-    async execute(message, args) {
-        const lang = fn.getLang(message);
+    options: [{
+        name: "word-count",
+        description: "The typing test's word count",
+        min_value: 10,
+        max_value: 50,
+        type: 4
+    }],
+    async execute(interaction) {
+        const lang = fn.getLang(interaction);
         let newWords = [];
-        const wordCount = parseInt(args[0]);
-
-        if(wordCount < 0) return message.reply({ embeds: [ fn.makeError(locale[lang].commands.typetest.positivewordcount, message) ] });
-        if(wordCount < 10) return message.reply({ embeds: [ fn.makeError(locale[lang].commands.typetest.greaterthan10, message) ] });
-        if(wordCount >= 51) return message.reply({ embeds: [ fn.makeError(locale[lang].commands.typetest.lowerthan50, message) ] });
+        const wordCount = interaction.options.getInteger("word-count");
     
         fn.loop(wordCount ? wordCount : 30, i => {
             let randomWord = fn.randomElement(locale[lang].words);
@@ -41,10 +42,10 @@ export default {
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(text, 12, 12);
 
-        const testMessage = await message.reply({ embeds: [ fn.makeEmbed({ thumbnail: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ3pzZWk0bTExc3RmZWwwOGFlZnhydHhiOXB6ZzhqdG5oeGU2bDg0eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/RiEW6mSQqjRiDy51MI/giphy.gif" }) ] });
+        await interaction.reply({ embeds: [ fn.makeEmbed({ thumbnail: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ3pzZWk0bTExc3RmZWwwOGFlZnhydHhiOXB6ZzhqdG5oeGU2bDg0eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/RiEW6mSQqjRiDy51MI/giphy.gif" }) ] });
 
         await fn.sleep(3500);
-        await testMessage.edit({
+        await interaction.editReply({
             embeds: [],
             files: [
                 new Discord.AttachmentBuilder(await canvas.png, {
@@ -56,8 +57,8 @@ export default {
         });
 
         const currentTime = Date.now();
-        const collector = message.channel.createMessageCollector({ 
-            filter: (m => m.author.id == message.author.id), 
+        const collector = interaction.channel.createMessageCollector({ 
+            filter: (m => m.author.id == interaction.member.user.id), 
             time: 120_000,
             max: 1
         });
@@ -83,7 +84,7 @@ export default {
             if(netWPM < 10) { embed.setFooter({ text: locale[lang].commands.typetest.lowwpm }); valid = false; };
 
             if(valid) {
-                testID = fn.db.tests.add(message.member.user.id, netWPM, grossWPM, mistakeAmount, timeTook, accuracy, lang);
+                testID = fn.db.tests.add(interaction.member.user.id, netWPM, grossWPM, mistakeAmount, timeTook, accuracy, lang);
                 embed.setFooter({ text: `ID: ${testID.toString()}` });
                 if(newWords.length <= 15) embed.setFooter({ text: `${testID}  •  ${locale[lang].commands.typetest.disclaimer}` });
             }
@@ -96,7 +97,7 @@ export default {
         });
 
         collector.on("end", collected => {
-            if(collected.size === 0) testMessage.edit({ embeds: [ fn.makeError(locale[lang].commands.typetest.timedout, message) ], files: [], components: [] });
+            if(collected.size === 0) interaction.editReply({ ephemeral: true, embeds: [ fn.makeError(locale[lang].commands.typetest.timedout, interaction) ], files: [], components: [] });
         });
     }
 }
