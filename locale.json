@@ -100,6 +100,13 @@
                 "languages": { "en": "English", "he": "Hebrew", "de": "German" },
                 "successtitle": "Language Changed",
                 "successdescriptions": [ "Successfully changed this server's language to `newlang`", "Successfully changed your personal language to `newlang`" ]
+            },
+            "deploy": {
+                "info": {
+                    "description": "Deploy all the bot's slash commands"
+                },
+                "deploying": "Deploying commands...",
+                "success": "Commands successfully deployed!"
             }
         },
         "buttons": {
@@ -213,6 +220,13 @@
                 "languages": { "en": "אנגלית (English)", "he": "עברית (Hebrew)", "de": "גרמנית (German)" },
                 "successtitle": "שפה שונתה",
                 "successdescriptions": [ "שפת השרת הזה שונתה ל-`newlang` בהצלחה.", "השפה האישית שלך שונתה ל-`newlang` בהצלחה" ]
+            },
+            "deploy": {
+                "info": {
+                    "description": "לפרסם את פקודות הסלאש של הבוט."
+                },
+                "deploying": "מפרסם פקודות...",
+                "success": "הפקודות פורסמו!"
             }
         },
         "buttons": {
@@ -326,6 +340,13 @@
                 "languages": { "en": "Englisch (English)", "he": "Hebräisch (Hebrew)", "de": "Deutsch (German)" },
                 "successtitle": "Sprache verändert",
                 "successdescriptions": [ "Erfolgreich die Sprache dieses Servers verändert zu `newlang`", "Erfolgreich deine persönliche Sprache verändert zu `newlang`" ]
+            },
+            "deploy": {
+                "info": {
+                    "description": "Stellen Sie alle Slash-Befehle des Bots bereit"
+                },
+                "deploying": "Befehle werden bereitgestellt...",
+                "success": "Befehle erfolgreich bereitgestellt!"
             }
         },
         "buttons": {
