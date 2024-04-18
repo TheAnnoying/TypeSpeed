@@ -1,5 +1,3 @@
-import fs from "node:fs";
-
 export default {
     name: "deploy",
     owner: true,
