@@ -11,11 +11,11 @@
                 },
                 "owneronly": "This command can only be used by the bot's owner"
             },
-            "eval": {
+            "evaluate": {
                 "info": {
                     "description": "Evalulate code",
                     "args": ["code"]
-                },                
+                },
                 "youmustprovidecode": "You must provide code to evaluate"
             },
             "getprofile": {
@@ -131,7 +131,7 @@
                 },
                 "owneronly": "הפקודה הזאת היא רק ליוצר הבוט"
             },
-            "eval": {
+            "evaluate": {
                 "info": {
                     "description": "הרץ קוד",
                     "args": ["קוד"]
@@ -251,7 +251,7 @@
                 },
                 "owneronly": "Dieser Befehle kann nur von dem Besitzer benutzt werden."
             },
-            "eval": {
+            "evaluate": {
                 "info": {
                     "description": "Code ausführen",
                     "args": ["code"]
