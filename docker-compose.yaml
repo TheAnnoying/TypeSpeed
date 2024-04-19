@@ -1,0 +1,7 @@
+services:
+  typetest:
+    image: typetest:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: on-failure
