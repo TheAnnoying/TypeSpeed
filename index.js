@@ -126,6 +126,9 @@ client.on(Discord.Events.MessageCreate, async message => {
     }
 });
 
+client.on(Discord.Events.GuildCreate, guild => console.log(`Joined server - ${guild.id}`));
+client.on(Discord.Events.GuildDelete, guild => console.log(`Left server - ${guild.id}`));
+
 client.on(Discord.Events.InteractionCreate, async interaction => {
     const lang = fn.getLang(interaction);
     if(interaction.isCommand()) {
