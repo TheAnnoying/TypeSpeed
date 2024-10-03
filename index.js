@@ -113,10 +113,7 @@ client.on(Discord.Events.MessageCreate, async message => {
                 components: [ fn.makeRow({ buttons: [{ label: locale[lang].commands.execution.buttons.run, id: `run_${closest}_${message.member.user.id}`, style: "gray" }, { label: locale[lang].commands.execution.buttons.delete, id: `nevermind_${message.member.user.id}`, style: "gray" }] }) ]
             });
         } else {
-            if(command.owner) {
-                await client.application.fetch();
-                if(message.author.id !== client.application.owner.id) return message.reply({ embeds: [ fn.makeError(locale[lang].commands.execution.owneronly, message) ] });
-            }
+            if(command.owner && message.author.id !== "588425966804533421") return message.reply({ embeds: [ fn.makeError(locale[lang].commands.execution.owneronly, message) ] });
 
             if(args.length === 1 && ["help", "h"].includes(args[0])) {
                 message.content = `t!help ${command.name}`;
