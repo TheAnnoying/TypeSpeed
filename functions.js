@@ -102,7 +102,7 @@ function getLang(message) {
 
 function makeError(description, message) {
     const lang = getLang(message);
-    return makeEmbed({ color: "#dd403a", author: [ locale[lang].error, "https://theannoying.dev/assets/error.png" ], description })
+    return makeEmbed({ color: "#dd403a", author: [ locale[lang].error, "https://theannoying.dev/error.png" ], description })
 }
 
 async function get(thing, id) {
